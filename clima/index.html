@@ -74,6 +74,7 @@ button{ cursor:pointer; }
 .grp-wrap{ position:relative; }
 .chip-btn{ border:0; border-radius:999px; padding:8px 14px; font-family:var(--f-display); font-weight:700; font-size:.95rem; background:var(--band-chip); color:var(--band-ink); white-space:nowrap; }
 .chip-btn[aria-pressed="true"]{ background:var(--gold); color:var(--gold-ink); }
+.chip-btn.on{ background:var(--gold); color:var(--gold-ink); }
 #grp-btn::after{ content:""; display:inline-block; margin-left:8px; border:5px solid transparent; border-top-color:currentColor; transform:translateY(3px); }
 .grp-pop{ position:absolute; left:0; top:calc(100% + 8px); z-index:50; min-width:160px; display:grid; gap:4px; padding:8px; background:var(--surface); color:var(--ink); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); }
 .grp-pop button{ border:0; background:transparent; text-align:left; padding:9px 12px; border-radius:10px; font-weight:600; }
@@ -379,7 +380,7 @@ details.review p{ margin-top:6px; }
       <p>Licencia C Sala · Unidad 2 · Componentes psicopedagógicos</p>
     </div>
     <div class="top-actions">
-      <button class="chip-btn" id="inst-btn" aria-pressed="false">Instructor</button>
+      <span class="chip-btn on" id="inst-tag" hidden>Modo instructor</span>
     </div>
   </div>
 </header>
@@ -791,7 +792,9 @@ function marker(id, cls) {
 }
 
 /* ---------- Estado ---------- */
-const S = { inst: store.get('inst', false), big: store.get('big', false), station: 'inicio' };
+/* La página abre siempre en modo alumno. El modo instructor solo se activa abriendo la dirección
+   con ?instructor al final: no hay botón y no se recuerda. */
+const S = { inst: new URLSearchParams(location.search).has('instructor'), big: store.get('big', false), station: 'inicio' };
 const counts = store.get('counts', {});
 const tallies = store.get('tallies', {});
 
@@ -822,13 +825,12 @@ window.addEventListener('hashchange', () => { showStation(location.hash.slice(1)
 
 /* ---------- Modo instructor ---------- */
 function setInst(on) {
-  S.inst = on; store.set('inst', on);
+  S.inst = on;
   document.body.classList.toggle('inst', on);
-  $('#inst-btn').setAttribute('aria-pressed', String(on));
+  $('#inst-tag').hidden = !on;
   $('#dock').hidden = !on;
   if (typeof onInstChange === 'function') onInstChange(on);
 }
-$('#inst-btn').addEventListener('click', () => setInst(!S.inst));
 function setBig(on) {
   S.big = on; store.set('big', on);
   document.documentElement.classList.toggle('big', on);
