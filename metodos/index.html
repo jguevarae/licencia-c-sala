@@ -1,0 +1,1601 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Laboratorio de Métodos</title>
+<meta name="description" content="Actividades interactivas de Métodos de entrenamiento · Licencia C Sala · Unidad 2 · Sesión 5.">
+<meta property="og:title" content="Laboratorio de Métodos">
+<meta property="og:description" content="Actividades interactivas de Métodos de entrenamiento · Licencia C Sala · Unidad 2 · Sesión 5.">
+<link rel="icon" type="image/png" href="../escudo.png">
+<style>html, body{ margin:0; padding:0; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Saira:wght@500;600;700;800&display=swap">
+<style>
+/* Layout: pizarra del entrenador. Banda azul CCD con el escudo, pestañas de estación como las pastillas de las diapositivas, tarjetas claras y canchas dibujadas a escala. */
+:root{
+  --bg:#E8EDF5; --surface:#FBFCFE; --surface-2:#F0F3F8; --ink:#14213A; --muted:#4B5870; --line:#D2DBE7;
+  --blue:#0046A0; --blue-ink:#0046A0; --blue-soft:#E3ECF8; --blue-soft-2:#C9DBF2; --blue-mid:#7FA8DD;
+  --band:#00377A; --band-2:#0046A0; --band-ink:#F3F5F9; --band-muted:#C9D6EA; --band-chip:rgba(255,255,255,.14); --crest-bg:#F3F5F9;
+  --wine:#4A172A; --wine-ink:#4A172A; --wine-soft:#F6E7EB; --on-wine:#F3F5F9; --on-wine-muted:#F2C9D7;
+  --gold:#F2B035; --gold-ink:#2B1A06; --gold-soft:#FFF1D2;
+  --ok:#1E7A4C; --ok-soft:#E2F3E9; --bad:#B42318; --bad-soft:#FCE9E7;
+  --court:#DCE7F7; --court-line:#0046A0; --att:#0046A0; --def:#4A172A; --wild:#F2B035; --tok-ink:#FFFFFF; --ball:#F2B035; --ball-line:#1D2939; --trace:#1D2939; --cone:#E8781E;
+  --shadow:0 1px 2px rgba(12,32,64,.06), 0 10px 28px rgba(12,32,64,.08);
+  --f-display:'Saira', 'Arial Narrow', Arial, sans-serif;
+  --f-body:'Barlow', 'Segoe UI', Arial, sans-serif;
+  --r:16px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0A1322; --surface:#111D31; --surface-2:#18273F; --ink:#E7EDF6; --muted:#A3B1C7; --line:#2A3B58;
+  --blue:#2D69C2; --blue-ink:#8DB8F2; --blue-soft:#15294A; --blue-soft-2:#1E3863; --blue-mid:#2A4F86;
+  --band:#0B2A5C; --band-2:#123A7A; --band-ink:#F3F5F9; --band-muted:#B5C5DE; --band-chip:rgba(255,255,255,.12); --crest-bg:#F3F5F9;
+  --wine:#6A2540; --wine-ink:#EDB0C5; --wine-soft:#2B1622; --on-wine:#F3F5F9; --on-wine-muted:#F2C9D7;
+  --gold:#F2B035; --gold-ink:#2B1A06; --gold-soft:#3A2E10;
+  --ok:#55C990; --ok-soft:#0F2E1E; --bad:#F2857A; --bad-soft:#3A1714;
+  --court:#13294B; --court-line:#7FA8DD; --att:#3F82DD; --def:#B24A70; --wild:#F2B035; --tok-ink:#FFFFFF; --ball:#F2B035; --ball-line:#0A1322; --trace:#E7EDF6; --cone:#F08A3A;
+  --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 28px rgba(0,0,0,.35);
+  color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#0A1322; --surface:#111D31; --surface-2:#18273F; --ink:#E7EDF6; --muted:#A3B1C7; --line:#2A3B58;
+  --blue:#2D69C2; --blue-ink:#8DB8F2; --blue-soft:#15294A; --blue-soft-2:#1E3863; --blue-mid:#2A4F86;
+  --band:#0B2A5C; --band-2:#123A7A; --band-ink:#F3F5F9; --band-muted:#B5C5DE; --band-chip:rgba(255,255,255,.12); --crest-bg:#F3F5F9;
+  --wine:#6A2540; --wine-ink:#EDB0C5; --wine-soft:#2B1622; --on-wine:#F3F5F9; --on-wine-muted:#F2C9D7;
+  --gold:#F2B035; --gold-ink:#2B1A06; --gold-soft:#3A2E10;
+  --ok:#55C990; --ok-soft:#0F2E1E; --bad:#F2857A; --bad-soft:#3A1714;
+  --court:#13294B; --court-line:#7FA8DD; --att:#3F82DD; --def:#B24A70; --wild:#F2B035; --tok-ink:#FFFFFF; --ball:#F2B035; --ball-line:#0A1322; --trace:#E7EDF6; --cone:#F08A3A;
+  --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 28px rgba(0,0,0,.35);
+  color-scheme:dark;
+}
+*, *::before, *::after{ box-sizing:border-box; }
+[hidden]{ display:none !important; }
+html{ -webkit-text-size-adjust:100%; }
+html.big{ font-size:20px; }
+body{ background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:1.0625rem; line-height:1.5; }
+body::before{ content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top, 0px); z-index:40; background:var(--band); }
+h1, h2, h3, h4, p, ul, ol, dl, dd{ margin:0; }
+ol, ul{ padding:0; }
+h1, h2, h3{ font-family:var(--f-display); line-height:1.15; text-wrap:balance; }
+button, input, select, textarea{ font:inherit; color:inherit; }
+button{ cursor:pointer; }
+:focus-visible{ outline:3px solid var(--gold); outline-offset:2px; }
+.wrap{ max-width:1080px; margin-inline:auto; padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); }
+
+/* Cabecera */
+.top{ background:var(--band); color:var(--band-ink); }
+.top .wrap{ display:flex; flex-wrap:wrap; align-items:center; gap:12px 16px; padding-block:14px; }
+.crest{ width:54px; height:54px; border-radius:14px; background:var(--crest-bg); display:grid; place-items:center; flex:none; }
+.crest img{ width:38px; height:auto; display:block; }
+.brand{ flex:1 1 200px; min-width:0; }
+.brand h1{ font-size:1.5rem; font-weight:700; letter-spacing:.2px; }
+.brand p{ font-size:.9rem; color:var(--band-muted); }
+.top-actions{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.grp-wrap{ position:relative; }
+.chip-btn{ border:0; border-radius:999px; padding:8px 14px; font-family:var(--f-display); font-weight:700; font-size:.95rem; background:var(--band-chip); color:var(--band-ink); white-space:nowrap; }
+.chip-btn[aria-pressed="true"]{ background:var(--gold); color:var(--gold-ink); }
+#grp-btn::after{ content:""; display:inline-block; margin-left:8px; border:5px solid transparent; border-top-color:currentColor; transform:translateY(3px); }
+.grp-pop{ position:absolute; left:0; top:calc(100% + 8px); z-index:50; min-width:160px; display:grid; gap:4px; padding:8px; background:var(--surface); color:var(--ink); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); }
+.grp-pop button{ border:0; background:transparent; text-align:left; padding:9px 12px; border-radius:10px; font-weight:600; }
+.grp-pop button:hover{ background:var(--surface-2); }
+.grp-pop button[aria-pressed="true"]{ background:var(--gold); color:var(--gold-ink); }
+
+/* Pestañas de estación */
+.tabs{ position:sticky; top:env(safe-area-inset-top, 0px); z-index:30; background:var(--band); border-top:1px solid var(--band-chip); box-shadow:0 6px 16px rgba(0,20,50,.18); }
+.tabs .wrap{ display:flex; gap:8px; overflow-x:auto; padding-block:10px; scrollbar-width:none; }
+.tabs .wrap::-webkit-scrollbar{ display:none; }
+.tab{ flex:none; border:0; white-space:nowrap; border-radius:999px; padding:9px 16px; font-family:var(--f-display); font-weight:700; font-size:.98rem; background:var(--band-chip); color:var(--band-muted); }
+.tab[aria-selected="true"]{ background:var(--gold); color:var(--gold-ink); }
+
+/* Estación */
+main{ padding-block:24px 64px; }
+body.inst main{ padding-bottom:180px; }
+.station{ display:flex; flex-direction:column; gap:18px; }
+.st-head{ display:flex; flex-direction:column; gap:6px; max-width:780px; }
+.kicker{ font-family:var(--f-display); font-weight:700; font-size:.82rem; letter-spacing:2px; text-transform:uppercase; color:var(--blue-ink); }
+.st-head h2{ font-size:clamp(1.75rem, 4.4vw, 2.5rem); font-weight:700; color:var(--wine-ink); }
+.lead{ color:var(--muted); font-size:1.06rem; max-width:66ch; }
+.steps{ list-style:none; display:flex; flex-direction:column; gap:10px; }
+.steps li{ display:flex; gap:12px; align-items:flex-start; }
+.steps .num{ flex:none; width:30px; height:30px; border-radius:50%; background:var(--gold); color:var(--gold-ink); font-family:var(--f-display); font-weight:800; font-size:.95rem; line-height:1; display:grid; place-items:center; }
+.steps li > span:last-child{ padding-top:2px; min-width:0; }
+
+/* Tarjetas */
+.card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:18px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:14px; min-width:0; }
+.card h3{ font-size:1.25rem; font-weight:700; }
+.card-kicker{ font-size:.78rem; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:var(--blue-ink); }
+details.card{ display:block; }
+details.card > summary{ cursor:pointer; list-style:none; display:flex; align-items:center; gap:12px; font-family:var(--f-display); font-weight:700; font-size:1.08rem; }
+details.card > summary::-webkit-details-marker{ display:none; }
+details.card > summary::before{ content:""; flex:none; width:10px; height:10px; border-right:2.5px solid var(--blue-ink); border-bottom:2.5px solid var(--blue-ink); transform:rotate(-45deg); }
+details.card[open] > summary::before{ transform:rotate(45deg); }
+#met-defs{ margin-top:14px; }
+#met-defs .field{ background:var(--surface-2); border-radius:12px; padding:10px 12px; gap:2px; }
+#met-defs .field b{ font-family:var(--f-display); color:var(--blue-ink); }
+.muted{ color:var(--muted); }
+.small{ font-size:.9rem; }
+.row{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+.grid2{ display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap:16px; }
+.grid3{ display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap:16px; }
+.field{ display:flex; flex-direction:column; gap:6px; min-width:0; }
+.field > span:first-child{ font-weight:600; font-size:.95rem; }
+.inputs{ display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:10px; }
+.score{ font-family:var(--f-display); font-weight:700; font-size:1.15rem; }
+.tnum{ font-variant-numeric:tabular-nums; }
+.formula{ font-family:var(--f-display); font-weight:700; font-size:1.3rem; line-height:1.3; color:var(--blue-ink); }
+
+/* Campos */
+input[type="text"], input[type="number"], textarea, select{ width:100%; min-width:0; border:1.5px solid var(--line); background:var(--surface-2); border-radius:10px; padding:9px 12px; font-size:1rem; }
+textarea{ resize:vertical; min-height:64px; line-height:1.4; }
+input:focus, textarea:focus, select:focus{ outline:none; border-color:var(--blue); box-shadow:0 0 0 3px var(--blue-soft-2); }
+.copybox{ min-height:220px; font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:.88rem; }
+
+/* Botones */
+.btn{ border:1.5px solid var(--blue-soft-2); border-radius:12px; padding:9px 15px; font-weight:700; font-size:.98rem; background:var(--surface); color:var(--blue-ink); display:inline-flex; gap:8px; align-items:center; justify-content:center; }
+.btn.primary{ background:var(--blue); border-color:var(--blue); color:#FFFFFF; }
+.btn.gold{ background:var(--gold); border-color:var(--gold); color:var(--gold-ink); }
+.btn.warn{ color:var(--bad); border-color:var(--bad-soft); }
+.btn:disabled{ opacity:.45; cursor:not-allowed; }
+.seg{ display:inline-flex; flex-wrap:wrap; gap:6px; }
+.seg button{ border:1.5px solid var(--line); background:var(--surface-2); color:var(--ink); border-radius:10px; padding:8px 14px; min-width:3.2rem; font-weight:600; }
+.seg button[aria-pressed="true"]{ background:var(--blue); border-color:var(--blue); color:#FFFFFF; }
+.chips{ display:flex; flex-wrap:wrap; gap:8px; }
+.chip{ border:1.5px solid var(--line); background:var(--surface-2); color:var(--ink); border-radius:999px; padding:7px 14px; font-weight:600; font-size:.95rem; text-align:left; }
+.chip[aria-pressed="true"]{ background:var(--blue); border-color:var(--blue); color:#FFFFFF; }
+.chip.mine{ border-color:var(--gold); box-shadow:0 0 0 2px var(--gold) inset; }
+.opts{ display:flex; flex-direction:column; gap:8px; }
+.opts .chip{ width:100%; border-radius:12px; padding:10px 14px; line-height:1.35; }
+.tag{ display:inline-flex; align-items:center; border-radius:999px; padding:3px 10px; font-family:var(--f-body); font-size:.8rem; font-weight:700; letter-spacing:0; text-transform:none; white-space:nowrap; background:var(--blue-soft); color:var(--blue-ink); }
+#st-laboratorio .chips .tag{ background:var(--wine-soft); color:var(--wine-ink); font-size:.86rem; padding:5px 12px; }
+.mini{ width:38px; height:38px; flex:none; border-radius:10px; border:1.5px solid var(--line); background:var(--surface); color:var(--ink); font-size:1.2rem; font-weight:700; line-height:1; display:grid; place-items:center; }
+.mini:hover{ border-color:var(--blue); }
+body:not(.inst) .only-inst{ display:none !important; }
+
+/* Avisos y retroalimentación */
+.note{ display:flex; gap:12px; align-items:center; background:var(--wine); color:var(--on-wine); border-radius:14px; padding:14px 16px; font-weight:600; }
+.note.blue{ background:var(--band-2); color:var(--band-ink); }
+.note svg{ width:26px; height:26px; flex:none; color:var(--gold); }
+.note p{ min-width:0; }
+.fb{ display:block; border-radius:12px; padding:12px 14px; background:var(--blue-soft); line-height:1.45; }
+.fb > div + div{ margin-top:4px; }
+.fb.ok{ background:var(--ok-soft); }
+.fb.ok b{ color:var(--ok); }
+.fb.bad{ background:var(--bad-soft); }
+.fb.bad b{ color:var(--bad); }
+#order-fb, #factor-fb, #calc-out, .card > div[aria-live]{ display:flex; flex-direction:column; gap:10px; }
+#order-fb:empty, #factor-fb:empty, .card > div[aria-live]:empty{ display:none; }
+
+/* Tareas de la estación 1 */
+.task h3{ font-family:var(--f-body); font-size:1.1rem; font-weight:600; line-height:1.35; }
+.q{ display:flex; flex-wrap:wrap; gap:8px 14px; align-items:center; justify-content:space-between; padding-top:12px; border-top:1px solid var(--line); }
+.q p{ flex:1 1 180px; min-width:0; font-weight:600; }
+.q p small{ display:block; font-weight:400; font-size:.86rem; color:var(--muted); }
+
+/* Tarjeta secreta */
+.card.secret{ align-self:start; background:var(--wine); border-color:var(--wine); color:var(--on-wine); }
+.card.secret .card-kicker{ color:var(--on-wine-muted); }
+.card.secret h3{ font-size:1.45rem; color:var(--on-wine); }
+.card.secret dl{ display:flex; flex-direction:column; gap:12px; }
+.card.secret dt{ font-size:.76rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--on-wine-muted); }
+.card.secret dd{ font-size:1.02rem; }
+.card.secret dd.problem{ font-weight:600; font-size:1.08rem; }
+.card.secret dl > div:last-child dd{ font-family:var(--f-display); font-weight:700; font-size:1.3rem; line-height:1.25; color:var(--gold); }
+.dict{ background:rgba(0,0,0,.24); border-radius:12px; padding:12px 14px; display:flex; flex-direction:column; gap:4px; }
+.dict .card-kicker{ color:var(--gold); }
+
+/* Canchas */
+svg.court{ display:block; width:100%; height:auto; }
+#board{ max-width:520px; margin-inline:auto; touch-action:none; user-select:none; -webkit-user-select:none; }
+#board .tok{ cursor:grab; }
+.court .field{ fill:var(--court); stroke:var(--court-line); stroke-width:2; vector-effect:non-scaling-stroke; }
+.court .mark{ fill:none; stroke:var(--court-line); stroke-width:1.5; vector-effect:non-scaling-stroke; opacity:.7; }
+.court .mark.dash{ stroke-dasharray:6 5; }
+.court .goal{ fill:var(--def); }
+.court .lane{ fill:var(--gold); opacity:.3; }
+.court .zone{ fill:var(--def); opacity:.16; stroke:var(--def); stroke-dasharray:5 4; stroke-width:1.5; vector-effect:non-scaling-stroke; }
+.court .cone{ fill:var(--cone); }
+.court .tok circle{ stroke:var(--surface); stroke-width:1.6; vector-effect:non-scaling-stroke; }
+.court .tok.att circle{ fill:var(--att); }
+.court .tok.def circle{ fill:var(--def); }
+.court .tok.joker circle{ fill:var(--wild); }
+.court .tok text{ fill:var(--tok-ink); font-family:var(--f-display); font-weight:800; font-size:9px; text-anchor:middle; dominant-baseline:central; pointer-events:none; }
+.court .tok.joker text{ fill:var(--gold-ink); }
+.court .ball{ fill:var(--ball); stroke:var(--ball-line); stroke-width:1.2; vector-effect:non-scaling-stroke; }
+.court .arrow{ fill:none; stroke:var(--trace); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+.court .arrow.run{ stroke:var(--att); stroke-dasharray:7 6; }
+.court .arrow.preview{ opacity:.55; }
+.mk-pass{ fill:var(--trace); }
+.mk-run{ fill:var(--att); }
+.legend{ display:flex; flex-wrap:wrap; gap:6px 14px; font-size:.85rem; color:var(--muted); }
+.legend span{ display:inline-flex; align-items:center; gap:6px; }
+.legend i{ width:12px; height:12px; border-radius:50%; display:inline-block; }
+.l-att{ background:var(--att); }
+.l-def{ background:var(--def); }
+.l-ball{ background:var(--ball); box-shadow:0 0 0 1.5px var(--ball-line) inset; }
+.l-joker{ background:var(--wild); }
+
+/* Contadores y votos */
+.counter{ display:flex; align-items:center; justify-content:space-between; gap:10px; background:var(--surface-2); border-radius:12px; padding:8px 10px 8px 14px; }
+.counter > span{ font-weight:600; min-width:0; }
+.counter b{ font-family:var(--f-display); font-size:1.4rem; min-width:2ch; text-align:center; }
+.bars{ display:flex; flex-direction:column; gap:12px; min-width:0; }
+.bar{ display:grid; grid-template-columns:minmax(0, 1fr) auto; gap:6px 12px; align-items:center; }
+.bar > span:first-child{ font-weight:600; min-width:0; }
+.bar strong{ font-family:var(--f-display); min-width:5.5ch; text-align:right; font-variant-numeric:tabular-nums; }
+.bar .track{ grid-column:1 / -1; }
+.track{ position:relative; height:14px; border-radius:7px; background:var(--surface-2); }
+.track i{ display:block; height:100%; max-width:100%; border-radius:7px; background:var(--blue); transition:width .35s ease; }
+.track i.gold{ background:var(--gold); }
+.track i.wine{ background:var(--wine); }
+body:not(.inst) [data-tally]{ display:none; }
+body:not(.inst) .card:has(> [data-tally]){ display:none; }
+.dens{ display:flex; flex-direction:column; gap:6px; }
+.dens .track{ height:16px; }
+.dens u{ position:absolute; left:80%; top:-4px; bottom:-4px; width:3px; border-radius:2px; background:var(--wine-ink); }
+.dens small{ color:var(--muted); font-size:.86rem; }
+
+/* Preguntas */
+.ladder{ display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap:8px; }
+.ladder > div{ border-radius:12px; padding:10px 12px; display:flex; flex-direction:column; gap:2px; background:var(--blue-soft); }
+.ladder > div b{ font-family:var(--f-display); color:var(--blue-ink); }
+.ladder > div span{ font-size:.92rem; }
+.ladder > div:nth-child(2){ background:var(--blue-soft-2); }
+.ladder > div:nth-child(3){ background:var(--blue-mid); }
+.ladder > div:nth-child(3) b{ color:var(--ink); }
+.ladder > div:nth-child(4){ background:var(--blue); color:#FFFFFF; }
+.ladder > div:nth-child(4) b{ color:#FFFFFF; }
+.ladder > div:nth-child(5){ background:var(--wine); color:var(--on-wine); }
+.ladder > div:nth-child(5) b{ color:var(--gold); }
+.checks{ display:flex; flex-wrap:wrap; gap:6px; }
+.checks span{ border-radius:999px; padding:4px 11px; font-size:.86rem; font-weight:700; }
+.checks .y{ background:var(--ok-soft); color:var(--ok); }
+.checks .n{ background:var(--bad-soft); color:var(--bad); }
+.models{ display:flex; flex-direction:column; gap:8px; }
+.models p{ display:flex; flex-wrap:wrap; gap:6px 10px; align-items:center; justify-content:space-between; background:var(--surface-2); border-radius:10px; padding:8px 12px; }
+.wait{ display:flex; flex-wrap:wrap; gap:16px; align-items:center; }
+.ring{ width:110px; height:110px; flex:none; }
+.ring .bg{ fill:none; stroke:var(--surface-2); stroke-width:9; }
+.ring .fg{ fill:none; stroke:var(--gold); stroke-width:9; stroke-linecap:round; transform:rotate(-90deg); transform-box:fill-box; transform-origin:center; }
+.ring text{ fill:var(--ink); font-family:var(--f-display); font-weight:800; font-size:30px; text-anchor:middle; dominant-baseline:central; }
+.concept-box{ display:flex; flex-direction:column; gap:10px; background:var(--wine-soft); border-radius:14px; padding:16px; }
+.quote{ font-family:var(--f-display); font-size:clamp(1.2rem, 3vw, 1.6rem); font-weight:600; line-height:1.3; color:var(--wine-ink); }
+
+/* Laboratorio */
+.level h3{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.level.l2 .tag{ background:var(--blue-soft-2); }
+.level.l3 .tag{ background:var(--blue); color:#FFFFFF; }
+.checklist{ display:flex; flex-direction:column; gap:8px; }
+.checklist label{ display:flex; gap:12px; align-items:flex-start; background:var(--surface-2); border-radius:12px; padding:10px 12px; cursor:pointer; }
+.checklist input{ width:22px; height:22px; flex:none; margin:1px 0 0; accent-color:var(--blue); }
+.checklist small{ display:block; font-size:.85rem; }
+
+/* Cronómetro del instructor */
+.dock{ position:fixed; left:0; right:0; bottom:0; z-index:35; background:var(--band); color:var(--band-ink); box-shadow:0 -8px 24px rgba(0,0,0,.25); padding-bottom:env(safe-area-inset-bottom, 0px); }
+.dock .prog{ height:4px; background:var(--band-chip); }
+.dock .prog i{ display:block; height:100%; background:var(--gold); transition:width .2s linear; }
+.dock .wrap{ display:flex; flex-wrap:wrap; gap:8px 14px; align-items:center; padding-block:10px; }
+.dock .time{ font-family:var(--f-display); font-weight:800; font-size:2.2rem; line-height:1; min-width:4.4ch; font-variant-numeric:tabular-nums; }
+.dock .lbl{ font-weight:600; color:var(--band-muted); }
+.dock .presets, .dock .ctrl{ display:flex; flex-wrap:wrap; gap:6px; }
+.dock .presets{ flex:1 1 280px; }
+.dock .chip-btn{ font-size:.86rem; padding:7px 12px; }
+.dock .kbd{ flex-basis:100%; font-size:.78rem; color:var(--band-muted); }
+.dock.done{ background:var(--gold); color:var(--gold-ink); }
+.dock.done .lbl, .dock.done .kbd{ color:var(--gold-ink); }
+.dock.done .chip-btn{ background:rgba(0,0,0,.12); color:var(--gold-ink); }
+.dock.done .chip-btn[aria-pressed="true"]{ background:var(--gold-ink); color:var(--gold); }
+@media (prefers-reduced-motion: no-preference){ .dock.done{ animation:pulse 1s ease-in-out 3; } }
+@keyframes pulse{ 50%{ filter:brightness(1.12); } }
+@media (prefers-reduced-motion: reduce){ .track i, .dock .prog i{ transition:none; } }
+@media (max-width:700px){ .dock .kbd{ display:none; } .dock .time{ font-size:1.8rem; } body.inst main{ padding-bottom:220px; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="crest"><img src="data:image/png;base64,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" alt="Escudo CCD FVF"></div>
+    <div class="brand">
+      <h1>Laboratorio de Métodos</h1>
+      <p>Licencia C Sala · Unidad 2 · Métodos de entrenamiento</p>
+    </div>
+    <div class="top-actions">
+      <button class="chip-btn" id="inst-btn" aria-pressed="false">Instructor</button>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Estaciones">
+  <div class="wrap" role="tablist">
+    <button class="tab" role="tab" id="tab-inicio" data-st="inicio" aria-selected="true">Inicio</button>
+    <button class="tab" role="tab" id="tab-metodos" data-st="metodos" aria-selected="false">1 · Métodos</button>
+    <button class="tab" role="tab" id="tab-reglas" data-st="reglas" aria-selected="false">2 · Reglas</button>
+    <button class="tab" role="tab" id="tab-preguntas" data-st="preguntas" aria-selected="false">3 · Preguntas</button>
+    <button class="tab" role="tab" id="tab-progresion" data-st="progresion" aria-selected="false">4 · Progresión</button>
+    <button class="tab" role="tab" id="tab-laboratorio" data-st="laboratorio" aria-selected="false">Laboratorio</button>
+  </div>
+</nav>
+
+<main>
+  <!-- INICIO -->
+  <section id="st-inicio" class="wrap station" role="tabpanel" aria-labelledby="h-inicio">
+    <div class="st-head">
+      <p class="kicker">Inicio · El Candado Táctico · 14 minutos</p>
+      <h2 id="h-inicio">Abre el candado</h2>
+      <p class="lead">3 contra 3 en 20 × 20 m con dos porterías pequeñas. Tu equipo ataca en azul; el rival defiende en granate con una regla secreta.</p>
+    </div>
+    <ol class="steps">
+      <li><span class="num">1</span><span>Elige la tarjeta que indique el instructor.</span></li>
+      <li><span class="num">2</span><span>Lee tu tarjeta secreta: el problema y cómo defiende el rival.</span></li>
+      <li><span class="num">3</span><span>Ronda 1: ejecutas lo que dicta el instructor. Ronda 2: diseñas tu propia solución en la pizarra.</span></li>
+      <li><span class="num">4</span><span>Cuenta cuántas soluciones distintas encuentras en cada ronda.</span></li>
+    </ol>
+    <div class="card">
+      <h3>Tu tarjeta</h3>
+      <p class="muted small">Usa la que indique el instructor. Si no dice nada, deja la 1.</p>
+      <div class="row" data-card-pick></div>
+    </div>
+    <div class="grid2">
+      <article class="card secret" id="secret-card" aria-live="polite"></article>
+      <div class="card">
+        <div class="row" style="justify-content:space-between">
+          <h3>Pizarra táctica</h3>
+          <span class="tag" id="board-tag">Tarjeta 1</span>
+        </div>
+        <p class="muted small">Arrastra las fichas. Con <b>Pase</b> o <b>Desmarque</b>, arrastra sobre la cancha para dibujar la flecha.</p>
+        <div class="row" role="toolbar" aria-label="Herramientas de la pizarra">
+          <div class="seg" id="board-mode">
+            <button type="button" data-mode="move" aria-pressed="true">Mover</button>
+            <button type="button" data-mode="pass" aria-pressed="false">Pase</button>
+            <button type="button" data-mode="run" aria-pressed="false">Desmarque</button>
+          </div>
+          <button class="btn" type="button" id="board-undo">Deshacer</button>
+          <button class="btn" type="button" id="board-clear">Borrar flechas</button>
+          <button class="btn" type="button" id="board-reset">Volver a la tarjeta</button>
+        </div>
+        <svg id="board" class="court" viewBox="-10 -16 220 228" role="img" aria-label="Cancha de 20 por 20 metros con dos porterías pequeñas arriba, tres atacantes azules, tres defensores granates y el balón"></svg>
+        <p class="legend"><span><i class="l-att"></i>Tu equipo ataca hacia arriba</span><span><i class="l-def"></i>Rival</span><span><i class="l-ball"></i>Balón</span><span>— pase · - - desmarque</span></p>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="card" id="round-1">
+        <p class="card-kicker">Ronda 1 · 3 minutos</p>
+        <h3>El instructor decide</h3>
+        <p>Mueves en tu pizarra lo que el instructor dicta, jugada por jugada, sin proponer nada.</p>
+        <div class="counter" data-counter="r1-sol" data-label="Soluciones distintas que encontraste"></div>
+      </div>
+      <div class="card" id="round-2">
+        <p class="card-kicker">Ronda 2 · 5 minutos y medio</p>
+        <h3>Tú decides</h3>
+        <p>30 segundos para pensar, 4 minutos para diseñar en tu pizarra y 1 minuto para que algunos voluntarios presenten. Nadie da órdenes desde afuera.</p>
+        <div class="counter" data-counter="r2-sol" data-label="Soluciones distintas que encontraste"></div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="card-kicker">Debate · 5 minutos</p>
+      <h3>¿Qué cambió entre las dos rondas?</h3>
+      <ol class="steps">
+        <li><span class="num">1</span><span>¿Qué te hizo pensar más: la orden del instructor o resolver el problema por tu cuenta?</span></li>
+        <li><span class="num">2</span><span>¿En qué ronda encontraste más soluciones distintas?</span></li>
+        <li><span class="num">3</span><span>¿En qué ronda recordarías mejor la solución el sábado?</span></li>
+      </ol>
+      <p class="muted">Vota en el chat las preguntas 1 y 3: escribe <b>1</b> si fue la ronda 1 o <b>2</b> si fue la ronda 2.</p>
+      <div class="grid2">
+        <div class="bars" data-tally="debate-q1" data-title="Pregunta 1 · ¿Qué te hizo pensar más?" data-options="Ronda 1|Ronda 2"></div>
+        <div class="bars" data-tally="debate-q3" data-title="Pregunta 3 · ¿Qué recordarías el sábado?" data-options="Ronda 1|Ronda 2"></div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="card-kicker">Concepto clave</p>
+      <button class="btn gold" type="button" id="concept-btn" aria-expanded="false" aria-controls="concept-box">Revelar el concepto clave</button>
+      <div class="concept-box" id="concept-box" hidden>
+        <p class="quote">«El método no es el ejercicio: es la forma en que el entrenador estimula la mente del niño para que dialogue con el juego.»</p>
+        <p>El 3 contra 3 fue el mismo en las dos rondas. Lo que cambió fue el método.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1 · MÉTODOS -->
+  <section id="st-metodos" class="wrap station" role="tabpanel" aria-labelledby="h-metodos" hidden>
+    <div class="st-head">
+      <p class="kicker">Estación 1 · Métodos · 6 minutos</p>
+      <h2 id="h-metodos">Clasifica seis tareas</h2>
+      <p class="lead">Para cada tarea responde tres preguntas y elige el método que predomina. La página te corrige al instante.</p>
+    </div>
+    <ol class="steps">
+      <li><span class="num">1</span><span>Lee la tarea como si la vieras en la cancha.</span></li>
+      <li><span class="num">2</span><span>Responde: ¿hay oposición?, ¿hay que decidir?, ¿hay espacio formal?</span></li>
+      <li><span class="num">3</span><span>Elige el método que predomina y toca <b>Comprobar</b>.</span></li>
+    </ol>
+    <details class="card" id="met-ref">
+      <summary>¿Cuál es cuál? Los cuatro métodos en una línea</summary>
+      <div class="grid3" id="met-defs"></div>
+    </details>
+    <div class="row" style="justify-content:space-between">
+      <p class="score" id="met-score" role="status">Bien clasificadas: 0 de 6</p>
+      <div class="row">
+        <button class="btn gold only-inst" type="button" id="met-reveal">Mostrar todas las respuestas</button>
+        <button class="btn" type="button" id="met-reset">Empezar de nuevo</button>
+      </div>
+    </div>
+    <div class="grid2" id="met-tasks"></div>
+    <div class="note blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><p>En plenaria: ¿en cuál de las seis tareas decide el niño?</p></div>
+  </section>
+
+  <!-- 2 · REGLAS -->
+  <section id="st-reglas" class="wrap station" role="tabpanel" aria-labelledby="h-reglas" hidden>
+    <div class="st-head">
+      <p class="kicker">Estación 2 · Reglas · 7 minutos</p>
+      <h2 id="h-reglas">Elige la regla que provoca la conducta</h2>
+      <p class="lead">Una buena regla hace que la conducta aparezca sola, sin que el entrenador la pida.</p>
+    </div>
+    <ol class="steps">
+      <li><span class="num">1</span><span>Elige una de las conductas buscadas.</span></li>
+      <li><span class="num">2</span><span>Elige la regla que la provoca y anticipa qué puede salir mal.</span></li>
+      <li><span class="num">3</span><span>Mira la jugada en la cancha y prepárate para contarla en un minuto.</span></li>
+    </ol>
+    <div class="card">
+      <p class="card-kicker">Voto del chat</p>
+      <div class="bars" data-tally="reglas-voto" data-title="¿Qué haces cuando no sale lo que pediste?" data-options="A · Lo repito más fuerte|B · Detengo el juego y lo explico|C · Cambio una regla de la tarea"></div>
+    </div>
+    <div class="card">
+      <p class="card-kicker">Conductas buscadas</p>
+      <div class="chips" id="beh-chips"></div>
+    </div>
+    <div class="grid2">
+      <article class="card" id="beh-card" aria-live="polite"></article>
+      <div class="card" id="anim-card">
+        <div class="row" style="justify-content:space-between"><h3>La jugada</h3><span class="tag" id="anim-tag"></span></div>
+        <svg id="anim" class="court" viewBox="-10 -10 320 220" role="img" aria-label="Cancha con la jugada que provoca la regla elegida"></svg>
+        <div class="row">
+          <button class="btn primary" type="button" id="anim-play">Ver la jugada</button>
+          <button class="btn" type="button" id="anim-reset">Volver al inicio</button>
+        </div>
+        <p class="legend"><span><i class="l-att"></i>Ataque</span><span><i class="l-def"></i>Defensa</span><span><i class="l-joker"></i>Comodín</span><span>— pase · - - desmarque</span></p>
+      </div>
+    </div>
+    <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg><p>«Si la conducta no aparece, cambia la restricción de la tarea, no agregues una orden.»</p></div>
+    <div class="note blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><p>En plenaria: ¿qué apareció sin que nadie lo pidiera?</p></div>
+  </section>
+
+  <!-- 3 · PREGUNTAS -->
+  <section id="st-preguntas" class="wrap station" role="tabpanel" aria-labelledby="h-preguntas" hidden>
+    <div class="st-head">
+      <p class="kicker">Estación 3 · Preguntas · 6 minutos</p>
+      <h2 id="h-preguntas">De orden a pregunta</h2>
+      <p class="lead">Una orden resuelve el problema por el niño. Una pregunta lo obliga a mirar el juego.</p>
+    </div>
+    <ol class="steps">
+      <li><span class="num">1</span><span>Lee la orden.</span></li>
+      <li><span class="num">2</span><span>Escríbela como una pregunta abierta.</span></li>
+      <li><span class="num">3</span><span>Toca <b>Revisar</b> y compárala con los ejemplos.</span></li>
+    </ol>
+    <div class="card">
+      <h3>La escalera de preguntas</h3>
+      <div class="ladder" id="ladder"></div>
+    </div>
+    <div class="grid2" id="orders"></div>
+    <div class="card" id="wait-card">
+      <h3>Practica la espera de tres segundos</h3>
+      <div class="wait">
+        <svg class="ring" viewBox="0 0 100 100" aria-hidden="true"><circle class="bg" cx="50" cy="50" r="40"/><circle class="fg" id="wait-arc" cx="50" cy="50" r="40" stroke-dasharray="251.3" stroke-dashoffset="0"/><text x="50" y="52" id="wait-num">3</text></svg>
+        <div class="field" style="flex:1 1 220px">
+          <p id="wait-msg" role="status">Haz la pregunta en voz alta, toca el botón y espera en silencio hasta que termine.</p>
+          <div class="row"><button class="btn gold" type="button" id="wait-btn">Pregunta y espera</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="note blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><p>En plenaria: ¿cuánto esperaste la respuesta?</p></div>
+  </section>
+
+  <!-- 4 · PROGRESIÓN -->
+  <section id="st-progresion" class="wrap station" role="tabpanel" aria-labelledby="h-progresion" hidden>
+    <div class="st-head">
+      <p class="kicker">Estación 4 · Progresión · 6 minutos</p>
+      <h2 id="h-progresion">Calcula y ordena</h2>
+      <p class="lead">La densidad dice cuánto espacio tiene cada jugador: menos metros, menos tiempo para decidir.</p>
+    </div>
+    <ol class="steps">
+      <li><span class="num">1</span><span>Calcula los metros cuadrados por jugador de cada tarea.</span></li>
+      <li><span class="num">2</span><span>Ordénalas de la más simple a la más compleja.</span></li>
+      <li><span class="num">3</span><span>Elige un solo factor para subir y explica por qué.</span></li>
+    </ol>
+    <div class="card">
+      <p class="card-kicker">La fórmula</p>
+      <p class="formula">largo × ancho ÷ jugadores = m² por jugador</p>
+      <p class="muted">Partido oficial: 40 × 20 = 800 m² ÷ 10 jugadores = <b>80 m² por jugador</b>. Es la marca vertical de cada barra.</p>
+    </div>
+    <div class="grid3" id="ptasks"></div>
+    <div class="card" id="order-card">
+      <h3>Ordena de la más simple a la más compleja</h3>
+      <div class="grid3" id="order-sel"></div>
+      <div class="row"><button class="btn primary" type="button" id="order-check">Comprobar orden</button></div>
+      <div id="order-fb" aria-live="polite"></div>
+    </div>
+    <div class="card" id="factor-card">
+      <h3>¿Qué factor subirías primero?</h3>
+      <p class="muted">Parte de la tarea más simple y elige uno solo.</p>
+      <div class="chips" id="factor-chips"></div>
+      <label class="field" for="factor-why"><span>¿Por qué?</span><textarea id="factor-why" placeholder="Ej.: porque el defensor solo intercepta y el sábado van a presionar."></textarea></label>
+      <div id="factor-fb" aria-live="polite"></div>
+    </div>
+    <div class="card" id="calc-card">
+      <h3>Calculadora para tus tareas</h3>
+      <div class="inputs">
+        <label class="field" for="calc-l"><span>Largo (m)</span><input id="calc-l" type="number" inputmode="decimal" min="1" step="1" value="20"></label>
+        <label class="field" for="calc-w"><span>Ancho (m)</span><input id="calc-w" type="number" inputmode="decimal" min="1" step="1" value="20"></label>
+        <label class="field" for="calc-n"><span>Jugadores</span><input id="calc-n" type="number" inputmode="numeric" min="1" step="1" value="6"></label>
+      </div>
+      <div id="calc-out" aria-live="polite"></div>
+    </div>
+    <div class="note blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><p>En plenaria: ¿qué factor subirías primero y por qué?</p></div>
+  </section>
+
+  <!-- LABORATORIO -->
+  <section id="st-laboratorio" class="wrap station" role="tabpanel" aria-labelledby="h-laboratorio" hidden>
+    <div class="st-head">
+      <p class="kicker">Cierre · Laboratorio de transformación · 8 minutos</p>
+      <h2 id="h-laboratorio">De los conos al juego</h2>
+      <p class="lead">Transforma un ejercicio de conos en tres tareas jugadas con el mismo contenido. En las tres: rival, decisión y dirección.</p>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <p class="card-kicker">Lo que recibes</p>
+        <h3>Pase y sigue en 10 × 10 m</h3>
+        <svg class="court" viewBox="0 0 560 300" role="img" aria-label="Cuadrado de 10 por 10 metros con un cono en cada esquina y cuatro jugadores que pasan y siguen su pase, sin rival" style="max-width:420px">
+          <rect class="field" x="170" y="50" width="220" height="220" rx="8"/>
+          <polygon class="cone" points="170,38 181,58 159,58"/><polygon class="cone" points="390,38 401,58 379,58"/><polygon class="cone" points="390,258 401,278 379,278"/><polygon class="cone" points="170,258 181,278 159,278"/>
+          <line class="arrow pass" x1="192" y1="250" x2="192" y2="84"/><polygon class="mk-pass" points="192,68 183,86 201,86"/>
+          <line class="arrow pass" x1="196" y1="72" x2="354" y2="72"/><polygon class="mk-pass" points="370,72 352,63 352,81"/>
+          <line class="arrow run" x1="134" y1="246" x2="134" y2="94"/><polygon class="mk-run" points="134,78 125,96 143,96"/>
+          <line class="arrow run" x1="160" y1="18" x2="390" y2="18"/><polygon class="mk-run" points="406,18 388,9 388,27"/>
+          <g class="tok att"><circle cx="138" cy="270" r="15"/></g><g class="tok att"><circle cx="138" cy="50" r="15"/></g><g class="tok att"><circle cx="422" cy="50" r="15"/></g><g class="tok att"><circle cx="422" cy="270" r="15"/></g>
+          <circle class="ball" cx="160" cy="284" r="8"/>
+        </svg>
+        <div class="chips"><span class="tag">Sin rival</span><span class="tag">Sin decisión</span><span class="tag">Sin dirección</span></div>
+      </div>
+      <div class="card">
+        <p class="card-kicker">Lo que entregas</p>
+        <ol class="steps">
+          <li><span class="num">1</span><span>Elige un contenido y no lo cambies.</span></li>
+          <li><span class="num">2</span><span>Diseña tres tareas: simple, intermedia y compleja.</span></li>
+          <li><span class="num">3</span><span>Revisa la lista y copia la ficha para el chat.</span></li>
+        </ol>
+        <p class="muted small">La página calcula los metros por jugador y guarda tu ficha en este dispositivo mientras trabajas.</p>
+      </div>
+    </div>
+    <div class="card">
+      <label class="field" for="lab-cont"><span>Contenido (el mismo en los tres niveles)</span><input id="lab-cont" type="text" placeholder="Ej.: el pase al pie para progresar"></label>
+      <div class="row">
+        <button class="btn" type="button" id="lab-example">Cargar ejemplo</button>
+        <button class="btn warn" type="button" id="lab-clear">Borrar ficha</button>
+      </div>
+    </div>
+    <div class="grid3" id="lab-levels"></div>
+    <div class="card">
+      <h3>Antes de defender</h3>
+      <p class="muted small">Marca lo que tu progresión ya cumple.</p>
+      <div class="checklist" id="lab-check"></div>
+    </div>
+    <div class="card">
+      <h3>Copia tu ficha</h3>
+      <p class="muted">Pégala en el chat. Si el instructor te elige, tendrás un minuto para defenderla: qué contenido, qué factor sube en cada nivel y qué conducta esperas ver.</p>
+      <div class="row"><button class="btn primary" type="button" id="lab-copy">Copiar ficha</button><span id="lab-copy-msg" class="muted small" role="status"></span></div>
+      <textarea id="lab-out" class="copybox" readonly hidden aria-label="Texto de la ficha para copiar"></textarea>
+    </div>
+  </section>
+</main>
+
+<div class="dock" id="dock" hidden>
+  <div class="prog"><i id="t-prog"></i></div>
+  <div class="wrap">
+    <div class="row" style="gap:10px;flex-wrap:nowrap"><span class="time" id="t-time">3:00</span><span class="lbl" id="t-lbl">Ronda 1</span></div>
+    <div class="presets" id="t-presets"></div>
+    <div class="ctrl">
+      <button class="chip-btn" type="button" id="t-start">Iniciar</button>
+      <button class="chip-btn" type="button" id="t-reset">Reiniciar</button>
+      <button class="chip-btn" type="button" id="t-big" aria-pressed="false">Letra grande</button>
+      <button class="chip-btn" type="button" id="t-full">Pantalla completa</button>
+    </div>
+    <span class="kbd">Teclas: ← → estaciones · espacio cronómetro · R reinicia · F pantalla completa</span>
+  </div>
+</div>
+
+<script>
+"use strict";
+/* ---------- Datos de las estaciones ---------- */
+const STATIONS = ['inicio','metodos','reglas','preguntas','progresion','laboratorio'];
+
+const PRESETS = {
+  inicio: [['Ronda 1',180],['Pensar',30],['Diseñar',240],['Presentar',60],['Debate',300]],
+  metodos: [['Trabajo',240],['Plenaria',120],['Total',360]],
+  reglas: [['Trabajo',240],['Plenaria',180],['Total',420]],
+  preguntas: [['Trabajo',240],['Plenaria',120],['Total',360]],
+  progresion: [['Trabajo',240],['Plenaria',120],['Total',360]],
+  laboratorio: [['Laboratorio',480],['Defensa',300],['Un voluntario',60]]
+};
+
+/* Inicio: tarjetas secretas. Cancha 20 x 20 m (1 unidad = 10 cm); el equipo azul ataca hacia arriba. */
+const ATT0 = [[60,172],[100,152],[140,172]];
+const CARDS = {
+  1: { name:'Defensa hundida',
+       problem:'El rival se mete atrás, delante de sus dos porterías, y no sale a presionar.',
+       challenge:'¿Cómo crean espacio para llegar al gol?',
+       rule:'Los defensores no pueden pasar la mitad de la cancha.',
+       dictado:'«2, conduce hacia el centro. 1, ábrete a la banda. 2, pasa a 1. ¡1, tira!»',
+       def:[[62,40],[100,30],[138,40]] },
+  2: { name:'Presión alta individual',
+       problem:'Cada defensor sigue a un atacante desde el primer pase.',
+       challenge:'¿Cómo se liberan para recibir?',
+       rule:'Cada defensor marca siempre al mismo atacante.',
+       dictado:'«1, baja a apoyar. 3, ¡rompe a la espalda! 2, pasa largo a 3.»',
+       def:[[62,150],[100,130],[138,150]] },
+  3: { name:'Centro cerrado',
+       problem:'El rival se junta en el medio y deja libres las bandas.',
+       challenge:'¿Por dónde y cómo atacan?',
+       rule:'Los defensores no pueden alejarse más de 5 metros del centro.',
+       dictado:'«2, pasa a 3 en la banda. 3, conduce por fuera y tira a la portería de tu lado.»',
+       def:[[85,95],[115,95],[100,72]] },
+  4: { name:'Dos al balón, uno cubre',
+       problem:'Dos defensores van siempre al balón y el tercero se queda atrás cubriendo.',
+       challenge:'¿Dónde está el jugador libre y cómo le llega el balón?',
+       rule:'Dos presionan al balón; el tercero no puede salir de su mitad.',
+       dictado:'«2, pasa atrás a 1. 1, cambia de lado a 3. 3, conduce y tira.»',
+       def:[[90,130],[114,134],[100,62]] }
+};
+
+/* Estación 1: métodos */
+const METHODS = ['Analítico','Global','Integrado','Situaciones de juego'];
+const METHOD_DEF = [
+  ['Analítico','Separa el gesto del juego: sin rival ni decisión.'],
+  ['Global','La acción se practica completa, con la atención en un aspecto.'],
+  ['Integrado','Técnica, táctica, físico y mente a la vez.'],
+  ['Situaciones de juego','Juego reducido con una regla que provoca el contenido.']
+];
+const QS = [
+  ['¿Hay oposición real?','Un rival que intenta robar, no un cono.'],
+  ['¿Hay que decidir?','Varias opciones: dos receptores o dos porterías.'],
+  ['¿Hay espacio formal?','Dirección y porterías que atacar y defender.']
+];
+const TASKS = [
+  { t:'Conducción en zigzag entre seis conos, ida y vuelta.', a:[0,0,0], m:0,
+    why:'No hay rival, no hay opciones y no hay dirección: solo se entrena ejecutar. Es analítico.' },
+  { t:'Pase y control en parejas a cinco metros, a dos toques.', a:[0,0,0], m:0,
+    why:'Se repite el gesto sin rival ni decisión. Sirve para un gesto nuevo, pero es analítico.' },
+  { t:'El entrenador levanta un cono de color y el niño pasa al compañero que tiene ese color.', a:[0,1,0], m:0,
+    why:'Hay una decisión simple, pero no hay rival ni dirección. Sigue siendo analítico, aunque mejorado: la FVF pide que hasta el trabajo técnico incluya una decisión.' },
+  { t:'2 contra 1 desde mitad de cancha hasta el tiro, con portero.', a:[1,1,1], m:1,
+    why:'La acción se practica completa, con rival, decisión y portería. Es global: la atención va a fijar al defensor.' },
+  { t:'Rondo 4 contra 2: al robar, los dos defensores atacan una portería pequeña.', a:[1,1,1], m:2,
+    why:'Técnica, táctica, físico y mente a la vez, con transición al robar. Es integrado.' },
+  { t:'3 contra 3 más un comodín en 20 × 20 m: el gol solo vale tras una pared.', a:[1,1,1], m:3,
+    why:'Juego reducido con una regla que provoca el contenido: la pared. Es una situación de juego.' }
+];
+
+/* Estación 2: reglas de provocación */
+const BEHAVIORS = [
+  { id:'ruptura', g:1, conducta:'Rupturas a la espalda de la defensa',
+    opts:[
+      { t:'Gol doble si el gol llega tras un desmarque de ruptura.', ok:true },
+      { t:'Gritar «¡rompe!» cada vez que haya espacio.', why:'Es una orden: la ruptura aparece mientras hablas y desaparece cuando te callas.' },
+      { t:'Máximo dos toques por jugador.', why:'Esa regla provoca perfilarse y apoyar cerca, no romper.' } ],
+    tipo:'Ventajas', aparece:'Rupturas a la espalda de la defensa.', cuidado:'Que se olviden del apoyo.' },
+  { id:'rapido', g:2, conducta:'Pase rápido y apoyos cercanos',
+    opts:[
+      { t:'Pedirles que jueguen más rápido.', why:'Es una orden: la tarea sigue permitiendo jugar lento.' },
+      { t:'Máximo cuatro segundos de posesión por jugador.', ok:true },
+      { t:'Un comodín en cada banda.', why:'Esa regla provoca amplitud y circulación, no apoyos cercanos.' } ],
+    tipo:'Tiempo', aparece:'Pase rápido y apoyos cercanos.', cuidado:'Más pérdidas al principio.' },
+  { id:'orientacion', g:3, conducta:'Cambiar la orientación y leer el espacio libre',
+    opts:[
+      { t:'Zona prohibida para defensores en el carril central.', why:'Esa regla provoca juego interior, no cambios de orientación.' },
+      { t:'Explicar en la pizarra cómo cambiar de lado.', why:'Es una explicación: sirve después de jugar, pero la tarea no lo provoca.' },
+      { t:'Cuatro porterías pequeñas: dos por equipo, en las esquinas.', ok:true } ],
+    tipo:'Porterías', aparece:'Cambios de orientación y lectura del espacio libre.', cuidado:'Que haya tiempo para mirar.' },
+  { id:'interior', g:4, conducta:'Juego interior y pase entre líneas',
+    opts:[
+      { t:'Zona prohibida para defensores en el carril central.', ok:true },
+      { t:'Corregir cada pase que va hacia afuera.', why:'Es una corrección constante: el niño juega para el entrenador y no lee el juego.' },
+      { t:'Cuatro porterías pequeñas en las esquinas.', why:'Esa regla provoca cambios de orientación hacia las bandas.' } ],
+    tipo:'Zonas', aparece:'Juego interior y pase entre líneas.', cuidado:'Que la zona no regale el ataque.' },
+  { id:'toques', g:0, conducta:'Perfilarse antes de recibir y apoyar cerca',
+    opts:[
+      { t:'Máximo dos toques por jugador.', ok:true },
+      { t:'Gol doble tras una ruptura.', why:'Esa regla provoca rupturas, no perfilarse para recibir.' },
+      { t:'Recordar «¡perfílate!» antes de cada pase.', why:'Es una orden: el niño se perfila porque lo dices, no porque lo necesita.' } ],
+    tipo:'Toques', aparece:'Perfilarse antes de recibir y apoyos cercanos.', cuidado:'De sub-9 a sub-13, mejor dos toques que uno.' },
+  { id:'comodin', g:0, conducta:'Amplitud y circulación del balón',
+    opts:[
+      { t:'Máximo cuatro segundos de posesión.', why:'Esa regla provoca pase rápido y apoyos cercanos.' },
+      { t:'Un comodín en la banda que juega con quien tiene el balón.', ok:true },
+      { t:'Pedir que abran la cancha.', why:'Es una orden: la amplitud aparece mientras lo pides.' } ],
+    tipo:'Número de jugadores', aparece:'Amplitud y circulación.', cuidado:'Que el comodín no resuelva todo solo.' }
+];
+
+/* Jugadas animadas. Cancha 30 x 20 m (300 x 200). Cada ficha tiene una posición por paso. */
+const GOAL_R = { x:300, y:82, w:7, h:36 };
+const ANIMS = {
+  ruptura: { goals:[GOAL_R],
+    tokens:[
+      { k:'att', l:'1', f:[[110,100],[114,100],[118,100],[118,100]] },
+      { k:'att', l:'2', f:[[160,52],[205,46],[246,64],[252,74]], trail:true },
+      { k:'att', l:'3', f:[[96,156],[110,150],[124,146],[130,140]] },
+      { k:'def', l:'', f:[[195,82],[198,84],[224,80],[240,86]] },
+      { k:'def', l:'', f:[[180,140],[176,136],[180,130],[188,124]] },
+      { k:'def', l:'P', f:[[290,100],[290,100],[286,92],[290,104]] } ],
+    ball:[[122,104],[124,104],[250,72],[303,96]] },
+  rapido: { goals:[GOAL_R],
+    tokens:[
+      { k:'att', l:'1', f:[[120,100],[124,104],[150,118],[156,122]], trail:true },
+      { k:'att', l:'2', f:[[160,64],[156,70],[154,72],[172,62]] },
+      { k:'att', l:'3', f:[[160,156],[164,142],[180,132],[188,128]], trail:true },
+      { k:'def', l:'', f:[[140,96],[146,84],[160,100],[164,110]] },
+      { k:'def', l:'', f:[[210,100],[204,96],[198,112],[200,114]] } ],
+    ball:[[126,104],[154,76],[178,128],[158,124]] },
+  orientacion: { goals:[{x:300,y:18,w:7,h:30},{x:300,y:152,w:7,h:30},{x:-7,y:18,w:7,h:30},{x:-7,y:152,w:7,h:30}],
+    tokens:[
+      { k:'att', l:'1', f:[[120,60],[124,60],[126,62],[130,64]] },
+      { k:'att', l:'2', f:[[150,110],[146,108],[150,112],[152,112]] },
+      { k:'att', l:'3', f:[[120,160],[132,160],[200,166],[250,168]], trail:true },
+      { k:'def', l:'', f:[[175,58],[180,54],[184,58],[186,60]] },
+      { k:'def', l:'', f:[[182,104],[176,84],[178,88],[204,124]] } ],
+    ball:[[126,66],[150,104],[204,162],[304,166]] },
+  interior: { goals:[GOAL_R], lane:{x:0,y:72,w:300,h:56},
+    tokens:[
+      { k:'att', l:'1', f:[[70,100],[74,100],[80,100],[92,100]] },
+      { k:'att', l:'2', f:[[200,58],[196,84],[192,100],[232,100]], trail:true },
+      { k:'att', l:'3', f:[[150,162],[150,156],[160,150],[176,142]] },
+      { k:'def', l:'', f:[[160,56],[164,60],[176,64],[200,64]] },
+      { k:'def', l:'', f:[[160,144],[164,140],[174,136],[196,136]] },
+      { k:'def', l:'P', f:[[292,100],[292,100],[290,100],[288,96]] } ],
+    ball:[[76,104],[78,104],[188,104],[303,96]] },
+  toques: { goals:[GOAL_R],
+    tokens:[
+      { k:'att', l:'1', f:[[100,120],[104,120],[112,118],[150,100]] },
+      { k:'att', l:'2', f:[[150,64],[140,84],[142,88],[150,80]], trail:true },
+      { k:'att', l:'3', f:[[190,146],[196,130],[205,124],[230,110]] },
+      { k:'def', l:'', f:[[160,104],[152,100],[158,104],[182,110]] },
+      { k:'def', l:'', f:[[232,70],[230,74],[226,82],[236,96]] } ],
+    ball:[[106,124],[142,90],[202,126],[234,113]] },
+  comodin: { goals:[GOAL_R], band:{x:0,y:-10,w:300,h:20},
+    tokens:[
+      { k:'att', l:'1', f:[[100,110],[104,112],[110,114],[130,120]] },
+      { k:'joker', l:'C', f:[[120,4],[150,4],[170,4],[200,4]] },
+      { k:'att', l:'2', f:[[160,160],[164,158],[170,154],[196,150]] },
+      { k:'att', l:'3', f:[[200,90],[214,96],[232,110],[240,118]], trail:true },
+      { k:'def', l:'', f:[[140,100],[134,90],[150,80],[180,92]] },
+      { k:'def', l:'', f:[[200,140],[204,136],[214,130],[230,138]] } ],
+    ball:[[106,114],[150,12],[230,112],[303,100]] }
+};
+
+/* Estación 3: preguntas */
+const LADDER = [
+  ['1 · Percibir','«¿Qué viste cuando el portero tenía el balón?»'],
+  ['2 · Comprender','«¿Por qué no pudimos salir jugando?»'],
+  ['3 · Buscar opciones','«¿Qué otras opciones tenía el cierre?»'],
+  ['4 · Aplicar','«¿Cómo aprovechamos la espalda del cierre rival?»'],
+  ['5 · Evaluar','«¿Qué cambió cuando el ala bajó a apoyar?»']
+];
+const ORDERS = [
+  { o:'¡Pasa al ala!', m:[['Buscar opciones','¿Qué opciones de pase tenías?'],['Percibir','¿Quién estaba libre cuando recibiste?']] },
+  { o:'¡Tira!', m:[['Percibir','¿Qué viste cuando quedaste frente a la portería?'],['Comprender','¿Cuándo conviene tirar y cuándo pasar?']] },
+  { o:'¡Abre la cancha!', m:[['Percibir','¿Dónde está el espacio libre?'],['Aplicar','¿Cómo hacemos la cancha más grande cuando tenemos el balón?']] },
+  { o:'¡Marca al pívot!', m:[['Comprender','¿Qué pasa si el pívot recibe de frente?'],['Buscar opciones','¿Quién puede ayudar cuando el balón llega al pívot?']] },
+  { o:'¡Desmárcate, no te quedes quieto!', m:[['Aplicar','¿Dónde tienes que estar para que te puedan pasar?'],['Evaluar','¿Qué pasó cuando te moviste al espacio libre?']] }
+];
+
+/* Estación 4: progresión */
+const PTASKS = [
+  { id:'T1', name:'3 contra 1', desc:'3 contra 1 en 15 × 15 m, dos porterías pequeñas. El defensor solo intercepta.', l:15, w:15, n:4, pos:1 },
+  { id:'T2', name:'3 contra 3 con porteros', desc:'3 contra 3 con porteros en media cancha (20 × 20 m), porterías reglamentarias.', l:20, w:20, n:8, pos:3 },
+  { id:'T3', name:'3 contra 2 + comodín', desc:'3 contra 2 más un comodín en 20 × 15 m, una portería. Los defensores presionan.', l:20, w:15, n:6, pos:2 }
+];
+const FACTORS = [
+  ['Oposición','Buena primera opción: pasar de un defensor que solo intercepta a uno que presiona es el cambio que más acerca la tarea al partido.'],
+  ['Espacio por jugador','Achicar el espacio quita tiempo para decidir. Hazlo poco a poco: de 56 a 50 m² ya se nota.'],
+  ['Relación numérica','Pasar de 3 contra 1 a 3 contra 2 sube mucho la dificultad. Hazlo cuando la tarea salga casi siempre.'],
+  ['Velocidad de circulación','Limitar toques o segundos acelera la decisión. Empieza con dos toques; uno solo, con los más grandes.'],
+  ['Opciones de pase','Más receptores, más tiempo para decidir: es la ley de Hick. Súbelo cuando ya leen bien con dos opciones.'],
+  ['Estímulos que atender','Más jugadores y cambios de ritmo obligan a mirar más. Súbelo cuando la tarea ya les sale.'],
+  ['Velocidad del balón','Pases más tensos exigen mejor control. Pon una regla, por ejemplo que el pase lento no vale, en vez de gritarlo.']
+];
+
+/* Laboratorio */
+const LAB_FACTORS = ['Punto de partida'].concat(FACTORS.map(f => f[0]));
+const LAB_EXAMPLE = {
+  cont:'El pase al pie para progresar',
+  lv:[
+    { org:'3 contra 1 con dos porterías pequeñas; el defensor solo intercepta', l:15, w:15, n:4, regla:'Punto al pasar por una portería tras tres pases', factor:'Punto de partida', p1:'¿Dónde te pones para tener línea de pase?', p2:'¿Cómo ayudamos al compañero que tiene el balón?' },
+    { org:'3 contra 2 más un comodín, una portería; los defensores presionan', l:20, w:15, n:6, regla:'Gol doble si un pase que progresa llega al pie', factor:'Oposición', p1:'¿Qué cambió cuando los defensores presionaron?', p2:'¿Quién te dio una línea de pase libre?' },
+    { org:'4 contra 4 con porteros en cancha completa', l:40, w:20, n:10, regla:'Gol doble tras un pase que progresa', factor:'Relación numérica', p1:'¿Cuándo convenía pasar hacia adelante y cuándo no?', p2:'¿Qué hicimos como equipo para que el pase llegara?' }
+  ]
+};
+const LEVEL_NAMES = ['Simple','Intermedia','Compleja'];
+const CHECKS = [
+  'Rival, decisión y dirección en los tres niveles.',
+  'Sube uno o dos factores por nivel, y sabemos cuáles.',
+  'Los m² por jugador están calculados.',
+  'La regla provoca el contenido sin dar órdenes.',
+  'El último nivel se parece al partido en el 40 × 20.',
+  'Las preguntas son abiertas y no traen la respuesta.'
+];
+
+/* ---------- Utilidades ---------- */
+const $ = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+const SVGNS = 'http://www.w3.org/2000/svg';
+function h(tag, attrs, ...kids) {
+  const el = document.createElement(tag);
+  if (attrs) for (const [k, v] of Object.entries(attrs)) {
+    if (v == null || v === false) continue;
+    if (k === 'class') el.className = v;
+    else if (k.startsWith('on') && typeof v === 'function') el.addEventListener(k.slice(2), v);
+    else el.setAttribute(k, v === true ? '' : v);
+  }
+  for (const kid of kids.flat()) {
+    if (kid == null || kid === false) continue;
+    el.append(kid.nodeType ? kid : document.createTextNode(String(kid)));
+  }
+  return el;
+}
+function sv(tag, attrs) {
+  const el = document.createElementNS(SVGNS, tag);
+  if (attrs) for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+  return el;
+}
+const store = {
+  get(k, d) { try { const v = localStorage.getItem('labmet.' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem('labmet.' + k, JSON.stringify(v)); } catch (e) {} }
+};
+const fmt = n => Number(n).toLocaleString('es', { maximumFractionDigits: 1 });
+function refocus(f) { if (!f) return; const el = document.querySelector('[data-f="' + f + '"]'); if (el) el.focus({ preventScroll: true }); }
+function marker(id, cls) {
+  const m = sv('marker', { id, viewBox: '0 0 10 10', refX: '8', refY: '5', markerWidth: '3.6', markerHeight: '3.6', orient: 'auto-start-reverse' });
+  m.append(sv('path', { d: 'M0,0 L10,5 L0,10 z', class: cls }));
+  return m;
+}
+
+/* ---------- Estado ---------- */
+const S = { card: store.get('card', 1), inst: store.get('inst', false), big: store.get('big', false), station: 'inicio' };
+if (![1, 2, 3, 4].includes(S.card)) S.card = 1;
+const counts = store.get('counts', {});
+const tallies = store.get('tallies', {});
+
+/* ---------- Estaciones (pestañas y enlace con #) ---------- */
+function showStation(id) {
+  if (!STATIONS.includes(id)) id = 'inicio';
+  S.station = id;
+  for (const st of STATIONS) {
+    $('#st-' + st).hidden = st !== id;
+    const tab = $('#tab-' + st);
+    tab.setAttribute('aria-selected', st === id ? 'true' : 'false');
+    tab.tabIndex = st === id ? 0 : -1;
+  }
+  const tab = $('#tab-' + id), bar = tab.parentElement;
+  bar.scrollLeft = Math.max(0, tab.offsetLeft - (bar.clientWidth - tab.offsetWidth) / 2);
+  if (!T.running && (T.left === T.total || T.done)) setTimer(PRESETS[id][0][1], PRESETS[id][0][0]);
+  renderPresets();
+}
+function go(delta) {
+  const i = STATIONS.indexOf(S.station);
+  location.hash = STATIONS[(i + delta + STATIONS.length) % STATIONS.length];
+}
+$$('.tab').forEach(t => t.addEventListener('click', () => {
+  if (location.hash.slice(1) === t.dataset.st) showStation(t.dataset.st);
+  else location.hash = t.dataset.st;
+}));
+window.addEventListener('hashchange', () => { showStation(location.hash.slice(1)); window.scrollTo(0, 0); });
+
+/* ---------- Tarjeta del candado (cada alumno trabaja solo) ---------- */
+function renderCardPickers() {
+  $$('[data-card-pick]').forEach(box => {
+    box.textContent = '';
+    for (let g = 1; g <= 4; g++) {
+      box.append(h('button', { type: 'button', class: 'chip', 'aria-pressed': String(S.card === g), 'data-f': 'card' + g, onclick: () => { setCard(g); refocus('card' + g); } }, 'Tarjeta ' + g));
+    }
+  });
+  $('#board-tag').textContent = 'Tarjeta ' + S.card;
+}
+function setCard(g) {
+  S.card = g; store.set('card', g);
+  renderCardPickers(); renderSecret(); board.load();
+}
+
+/* ---------- Modo instructor ---------- */
+function setInst(on) {
+  S.inst = on; store.set('inst', on);
+  document.body.classList.toggle('inst', on);
+  $('#inst-btn').setAttribute('aria-pressed', String(on));
+  $('#dock').hidden = !on;
+  if (typeof renderBehCard === 'function' && behSel) renderBehCard();
+}
+$('#inst-btn').addEventListener('click', () => setInst(!S.inst));
+function setBig(on) {
+  S.big = on; store.set('big', on);
+  document.documentElement.classList.toggle('big', on);
+  $('#t-big').setAttribute('aria-pressed', String(on));
+}
+$('#t-big').addEventListener('click', () => setBig(!S.big));
+function toggleFull() {
+  try {
+    const d = document, el = d.documentElement;
+    const p = d.fullscreenElement ? (d.exitFullscreen && d.exitFullscreen()) : (el.requestFullscreen && el.requestFullscreen());
+    if (p && p.catch) p.catch(() => {});
+  } catch (e) {}
+}
+$('#t-full').addEventListener('click', toggleFull);
+
+/* ---------- Cronómetro ---------- */
+const T = { total: 180, left: 180, end: 0, running: false, done: false, id: 0, label: 'Ronda 1' };
+let audioCtx = null;
+function fmtTime(sec) { sec = Math.max(0, Math.ceil(sec - 0.001)); return Math.floor(sec / 60) + ':' + String(sec % 60).padStart(2, '0'); }
+function renderTimer() {
+  $('#t-time').textContent = fmtTime(T.left);
+  $('#t-lbl').textContent = T.done ? '¡Tiempo!' : T.label;
+  $('#t-prog').style.width = (T.total ? Math.max(0, T.left / T.total * 100) : 0) + '%';
+  $('#t-start').textContent = T.running ? 'Pausar' : (T.left > 0 && T.left < T.total ? 'Seguir' : 'Iniciar');
+}
+function setTimer(sec, label) {
+  clearInterval(T.id); T.running = false; T.done = false;
+  T.total = T.left = sec; T.label = label;
+  $('#dock').classList.remove('done');
+  renderTimer();
+}
+function startTimer() {
+  if (T.left <= 0) { T.left = T.total; T.done = false; $('#dock').classList.remove('done'); }
+  ensureAudio();
+  T.running = true; T.end = performance.now() + T.left * 1000;
+  clearInterval(T.id); T.id = setInterval(tickTimer, 200);
+  renderTimer();
+}
+function pauseTimer() { T.left = Math.max(0, (T.end - performance.now()) / 1000); T.running = false; clearInterval(T.id); renderTimer(); }
+function toggleTimer() { T.running ? pauseTimer() : startTimer(); }
+function tickTimer() {
+  T.left = (T.end - performance.now()) / 1000;
+  if (T.left <= 0) {
+    T.left = 0; T.running = false; T.done = true; clearInterval(T.id);
+    const d = $('#dock'); d.classList.remove('done'); void d.offsetWidth; d.classList.add('done');
+    beep();
+  }
+  renderTimer();
+}
+function renderPresets() {
+  const box = $('#t-presets'); box.textContent = '';
+  for (const [lab, sec] of PRESETS[S.station]) {
+    box.append(h('button', { type: 'button', class: 'chip-btn', 'aria-pressed': String(T.label === lab && T.total === sec),
+      onclick: () => { setTimer(sec, lab); renderPresets(); } }, lab + ' · ' + fmtTime(sec)));
+  }
+}
+function ensureAudio() {
+  try {
+    if (!audioCtx) { const AC = window.AudioContext || window.webkitAudioContext; if (AC) audioCtx = new AC(); }
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  } catch (e) {}
+}
+function beep() {
+  if (!audioCtx) return;
+  try {
+    const t0 = audioCtx.currentTime;
+    for (let i = 0; i < 3; i++) {
+      const o = audioCtx.createOscillator(), g = audioCtx.createGain(), t = t0 + i * 0.3;
+      o.frequency.value = 880; o.connect(g); g.connect(audioCtx.destination);
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.25, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.2);
+      o.start(t); o.stop(t + 0.22);
+    }
+  } catch (e) {}
+}
+$('#t-start').addEventListener('click', toggleTimer);
+$('#t-reset').addEventListener('click', () => setTimer(T.total, T.label));
+
+/* ---------- Teclado ---------- */
+document.addEventListener('keydown', e => {
+  if (e.altKey || e.ctrlKey || e.metaKey) return;
+  const t = e.target;
+  if (t && t.closest && t.closest('input, textarea, select, [contenteditable="true"]')) return;
+  if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+  else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+  else if (e.key === ' ') {
+    if (!S.inst || (t && t.closest && t.closest('button, summary, a'))) return;
+    e.preventDefault(); toggleTimer();
+  }
+  else if ((e.key === 'r' || e.key === 'R') && S.inst) setTimer(T.total, T.label);
+  else if (e.key === 'f' || e.key === 'F') toggleFull();
+});
+
+/* ---------- Contadores del observador ---------- */
+function renderCounters() {
+  $$('[data-counter]').forEach(box => {
+    const k = box.dataset.counter, label = box.dataset.label;
+    const num = h('b', { class: 'tnum', 'aria-live': 'polite' }, String(counts[k] || 0));
+    const bump = d => { counts[k] = Math.max(0, (counts[k] || 0) + d); store.set('counts', counts); num.textContent = String(counts[k]); };
+    box.textContent = '';
+    box.append(h('span', null, label), h('div', { class: 'row' },
+      h('button', { type: 'button', class: 'mini', 'aria-label': 'Restar: ' + label, onclick: () => bump(-1) }, '−'),
+      num,
+      h('button', { type: 'button', class: 'mini', 'aria-label': 'Sumar: ' + label, onclick: () => bump(1) }, '+')));
+  });
+}
+
+/* ---------- Votos del chat (instructor) ---------- */
+function renderTallies() {
+  $$('[data-tally]').forEach(box => {
+    const key = box.dataset.tally, opts = box.dataset.options.split('|');
+    if (!Array.isArray(tallies[key]) || tallies[key].length !== opts.length) tallies[key] = opts.map(() => 0);
+    const vals = tallies[key], total = vals.reduce((a, b) => a + b, 0);
+    box.textContent = '';
+    box.append(h('p', { class: 'card-kicker' }, box.dataset.title));
+    opts.forEach((o, i) => {
+      const pct = total ? Math.round(vals[i] / total * 100) : 0;
+      box.append(h('div', { class: 'bar' },
+        h('span', null, o),
+        h('span', { class: 'row' },
+          h('strong', null, vals[i] + (total ? ' · ' + pct + ' %' : '')),
+          h('button', { type: 'button', class: 'mini', 'data-f': key + i + 'm', 'aria-label': 'Restar voto: ' + o, onclick: () => vote(key, i, -1) }, '−'),
+          h('button', { type: 'button', class: 'mini', 'data-f': key + i + 'p', 'aria-label': 'Sumar voto: ' + o, onclick: () => vote(key, i, 1) }, '+')),
+        h('div', { class: 'track' }, h('i', { class: ['', 'gold', 'wine'][i % 3] || null, style: 'width:' + pct + '%' }))));
+    });
+    box.append(h('div', { class: 'row' }, h('button', { type: 'button', class: 'btn', onclick: () => { tallies[key] = opts.map(() => 0); store.set('tallies', tallies); renderTallies(); } }, 'Poner en cero')));
+  });
+}
+function vote(key, i, d) {
+  const f = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.f : null;
+  tallies[key][i] = Math.max(0, tallies[key][i] + d); store.set('tallies', tallies); renderTallies(); refocus(f);
+}
+
+/* ---------- Inicio: tarjeta secreta y concepto ---------- */
+function renderSecret() {
+  const c = CARDS[S.card], el = $('#secret-card');
+  el.textContent = '';
+  el.append(
+    h('p', { class: 'card-kicker' }, 'Tarjeta secreta ' + S.card),
+    h('h3', null, c.name),
+    h('dl', null,
+      h('div', null, h('dt', null, 'El problema'), h('dd', { class: 'problem' }, c.problem)),
+      h('div', null, h('dt', null, 'Así defiende el rival'), h('dd', null, c.rule)),
+      h('div', null, h('dt', null, 'Tu reto'), h('dd', null, c.challenge))),
+    h('div', { class: 'dict only-inst' }, h('p', { class: 'card-kicker' }, 'Lo que dictas en la ronda 1'), h('p', null, c.dictado)));
+}
+$('#concept-btn').addEventListener('click', () => {
+  const box = $('#concept-box'), btn = $('#concept-btn');
+  box.hidden = !box.hidden;
+  btn.setAttribute('aria-expanded', String(!box.hidden));
+  btn.textContent = box.hidden ? 'Revelar el concepto clave' : 'Ocultar el concepto clave';
+});
+
+/* ---------- Inicio: pizarra táctica ---------- */
+const board = (() => {
+  const svg = $('#board');
+  let mode = 'move', pos = null, arrows = [], hist = [], drag = null, draw = null, preview = null;
+  const defs = sv('defs'); defs.append(marker('bm-pass', 'mk-pass'), marker('bm-run', 'mk-run'));
+  svg.append(defs,
+    sv('rect', { class: 'field', x: 0, y: 0, width: 200, height: 200, rx: 3 }),
+    sv('line', { class: 'mark dash', x1: 0, y1: 100, x2: 200, y2: 100 }),
+    sv('rect', { class: 'goal', x: 45, y: -8, width: 30, height: 8, rx: 1.5 }),
+    sv('rect', { class: 'goal', x: 125, y: -8, width: 30, height: 8, rx: 1.5 }));
+  const gArrows = sv('g'), gToks = sv('g');
+  svg.append(gArrows, gToks);
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const r1 = v => Math.round(v * 10) / 10;
+  function initial() {
+    const p = {};
+    ATT0.forEach((xy, i) => { p['a' + i] = xy.slice(); });
+    CARDS[S.card].def.forEach((xy, i) => { p['d' + i] = xy.slice(); });
+    p.ball = [ATT0[1][0] + 9, ATT0[1][1] - 9];
+    return p;
+  }
+  const snap = () => JSON.stringify({ pos, arrows });
+  function pushHist(s) { hist.push(s); if (hist.length > 60) hist.shift(); }
+  function lineEl(a) {
+    return sv('line', { class: 'arrow ' + (a.k === 'run' ? 'run' : 'pass') + (a.p ? ' preview' : ''), x1: a.x1, y1: a.y1, x2: a.x2, y2: a.y2, 'marker-end': 'url(#' + (a.k === 'run' ? 'bm-run' : 'bm-pass') + ')' });
+  }
+  function tok(id, k, l) {
+    const g = sv('g', { class: 'tok ' + k, 'data-id': id });
+    g.append(sv('circle', { cx: pos[id][0], cy: pos[id][1], r: 8 }));
+    if (l) { const t = sv('text', { x: pos[id][0], y: pos[id][1] + 0.5 }); t.textContent = l; g.append(t); }
+    return g;
+  }
+  function render() {
+    gArrows.textContent = '';
+    for (const a of arrows) gArrows.append(lineEl(a));
+    gToks.textContent = '';
+    for (let i = 0; i < 3; i++) gToks.append(tok('d' + i, 'def', ''));
+    for (let i = 0; i < 3; i++) gToks.append(tok('a' + i, 'att', String(i + 1)));
+    const b = sv('g', { class: 'tok', 'data-id': 'ball' });
+    b.append(sv('circle', { class: 'ball', cx: pos.ball[0], cy: pos.ball[1], r: 4.5 }));
+    gToks.append(b);
+    save();
+  }
+  function moveTok(id) {
+    const g = gToks.querySelector('[data-id="' + id + '"]'); if (!g) return;
+    const c = g.querySelector('circle'); c.setAttribute('cx', pos[id][0]); c.setAttribute('cy', pos[id][1]);
+    const t = g.querySelector('text'); if (t) { t.setAttribute('x', pos[id][0]); t.setAttribute('y', pos[id][1] + 0.5); }
+  }
+  function pt(e) {
+    const m = svg.getScreenCTM(); if (!m) return { x: 0, y: 0 };
+    const p = svg.createSVGPoint(); p.x = e.clientX; p.y = e.clientY;
+    const r = p.matrixTransform(m.inverse()); return { x: r.x, y: r.y };
+  }
+  svg.addEventListener('pointerdown', e => {
+    const p = pt(e);
+    if (mode === 'move') {
+      const g = e.target.closest('.tok'); if (!g) return;
+      const id = g.dataset.id;
+      drag = { id, dx: pos[id][0] - p.x, dy: pos[id][1] - p.y, before: snap(), moved: false };
+    } else {
+      draw = { k: mode, x1: p.x, y1: p.y, x2: p.x, y2: p.y, p: true };
+      preview = lineEl(draw); gArrows.append(preview);
+    }
+    try { svg.setPointerCapture(e.pointerId); } catch (err) {}
+    e.preventDefault();
+  });
+  svg.addEventListener('pointermove', e => {
+    if (!drag && !draw) return;
+    const p = pt(e);
+    if (drag) {
+      if (!drag.moved) { pushHist(drag.before); drag.moved = true; }
+      pos[drag.id] = [r1(clamp(p.x + drag.dx, -6, 206)), r1(clamp(p.y + drag.dy, -6, 206))];
+      moveTok(drag.id);
+    } else {
+      draw.x2 = p.x; draw.y2 = p.y;
+      preview.setAttribute('x2', p.x); preview.setAttribute('y2', p.y);
+    }
+  });
+  function end() {
+    if (drag) { if (drag.moved) save(); drag = null; }
+    if (draw) {
+      const len = Math.hypot(draw.x2 - draw.x1, draw.y2 - draw.y1);
+      if (preview) preview.remove(); preview = null;
+      if (len > 6) { pushHist(snap()); arrows.push({ k: draw.k, x1: r1(draw.x1), y1: r1(draw.y1), x2: r1(draw.x2), y2: r1(draw.y2) }); render(); }
+      draw = null;
+    }
+  }
+  svg.addEventListener('pointerup', end);
+  svg.addEventListener('pointercancel', end);
+  $$('#board-mode button').forEach(b => b.addEventListener('click', () => {
+    mode = b.dataset.mode;
+    $$('#board-mode button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    svg.style.cursor = mode === 'move' ? '' : 'crosshair';
+  }));
+  $('#board-undo').addEventListener('click', () => { const last = hist.pop(); if (!last) return; const o = JSON.parse(last); pos = o.pos; arrows = o.arrows; render(); });
+  $('#board-clear').addEventListener('click', () => { if (!arrows.length) return; pushHist(snap()); arrows = []; render(); });
+  $('#board-reset').addEventListener('click', () => { pushHist(snap()); pos = initial(); arrows = []; render(); });
+  function save() { store.set('board.' + S.card, { pos, arrows }); }
+  function load() {
+    const o = store.get('board.' + S.card, null);
+    if (o && o.pos && o.pos.ball && o.pos.a0 && o.pos.d0) { pos = o.pos; arrows = Array.isArray(o.arrows) ? o.arrows : []; }
+    else { pos = initial(); arrows = []; }
+    hist = []; render();
+  }
+  return { load };
+})();
+
+/* ---------- Estación 1: métodos ---------- */
+const met = { ans: store.get('met', null), reveal: false };
+if (!Array.isArray(met.ans) || met.ans.length !== TASKS.length) met.ans = TASKS.map(() => ({ a: [null, null, null], m: null, checked: false }));
+const saveMet = () => store.set('met', met.ans);
+function renderMetDefs() {
+  const box = $('#met-defs'); box.textContent = '';
+  METHOD_DEF.forEach(([n, d]) => box.append(h('div', { class: 'field' }, h('b', null, n), h('span', null, d))));
+}
+function taskFeedback(tk, st) {
+  if (met.reveal && !st.checked) {
+    return h('div', { class: 'fb info' }, h('b', null, 'Respuesta. '),
+      'Oposición: ' + (tk.a[0] ? 'sí' : 'no') + ' · Decidir: ' + (tk.a[1] ? 'sí' : 'no') + ' · Espacio formal: ' + (tk.a[2] ? 'sí' : 'no') + ' · Método: ' + METHODS[tk.m] + '. ' + tk.why);
+  }
+  if (st.a.some(v => v === null) || st.m === null) return h('div', { class: 'fb info' }, 'Responde las tres preguntas y elige un método antes de comprobar.');
+  const okQ = tk.a.map((v, j) => st.a[j] === v), okM = st.m === tk.m, all = okQ.every(Boolean) && okM;
+  if (all) return h('div', { class: 'fb ok' }, h('b', null, '¡Bien clasificada! '), tk.why);
+  const wrong = [];
+  QS.forEach(([q], j) => { if (!okQ[j]) wrong.push(q + ' La respuesta es «' + (tk.a[j] ? 'sí' : 'no') + '».'); });
+  if (!okM) wrong.push('El método que predomina es «' + METHODS[tk.m] + '».');
+  return h('div', { class: 'fb bad' }, h('b', null, 'Revisa. '), wrong.join(' ') + ' ' + tk.why);
+}
+function renderTask(i) {
+  const tk = TASKS[i], st = met.ans[i];
+  const card = h('article', { class: 'card task', id: 'task-' + i });
+  card.append(h('p', { class: 'card-kicker' }, 'Tarea ' + (i + 1)), h('h3', null, tk.t));
+  QS.forEach(([q, hint], j) => {
+    const seg = h('div', { class: 'seg', role: 'group', 'aria-label': q });
+    [['Sí', 1], ['No', 0]].forEach(([lab, val]) => seg.append(h('button', {
+      type: 'button', 'aria-pressed': String(st.a[j] === val), 'data-f': 't' + i + 'q' + j + val,
+      onclick: () => { st.a[j] = val; st.checked = false; saveMet(); renderTask(i); refocus('t' + i + 'q' + j + val); } }, lab)));
+    card.append(h('div', { class: 'q' }, h('p', null, q, h('small', null, hint)), seg));
+  });
+  const chips = h('div', { class: 'chips', role: 'group', 'aria-label': 'Método que predomina' });
+  METHODS.forEach((m, k) => chips.append(h('button', {
+    type: 'button', class: 'chip' + (met.reveal && k === tk.m ? ' mine' : ''), 'aria-pressed': String(st.m === k), 'data-f': 't' + i + 'm' + k,
+    onclick: () => { st.m = k; st.checked = false; saveMet(); renderTask(i); refocus('t' + i + 'm' + k); } }, m)));
+  card.append(h('div', { class: 'q' }, h('p', null, '¿Qué método predomina?'), chips));
+  card.append(h('div', { class: 'row' }, h('button', { type: 'button', class: 'btn primary', 'data-f': 't' + i + 'c',
+    onclick: () => { st.checked = true; saveMet(); renderTask(i); refocus('t' + i + 'c'); } }, 'Comprobar')));
+  if (st.checked || met.reveal) card.append(taskFeedback(tk, st));
+  const old = document.getElementById('task-' + i);
+  if (old) old.replaceWith(card); else $('#met-tasks').append(card);
+  updateScore();
+}
+function renderTasks() { $('#met-tasks').textContent = ''; TASKS.forEach((_, i) => renderTask(i)); }
+function updateScore() {
+  const n = met.ans.filter((st, i) => st.checked && st.m === TASKS[i].m && st.a.every((v, j) => v === TASKS[i].a[j])).length;
+  $('#met-score').textContent = 'Bien clasificadas: ' + n + ' de ' + TASKS.length;
+}
+$('#met-reveal').addEventListener('click', () => {
+  met.reveal = !met.reveal;
+  $('#met-reveal').textContent = met.reveal ? 'Ocultar respuestas' : 'Mostrar todas las respuestas';
+  renderTasks();
+});
+$('#met-reset').addEventListener('click', () => {
+  met.ans = TASKS.map(() => ({ a: [null, null, null], m: null, checked: false }));
+  saveMet(); renderTasks();
+});
+
+/* ---------- Estación 2: reglas ---------- */
+let behSel = null;
+const behAns = store.get('beh', {});
+const behRisk = store.get('behRisk', {});
+function renderBehChips() {
+  const box = $('#beh-chips'); box.textContent = '';
+  BEHAVIORS.forEach(b => box.append(h('button', {
+    type: 'button', class: 'chip', 'aria-pressed': String(behSel === b.id), 'data-f': 'bc-' + b.id,
+    onclick: () => { selectBehavior(b.id); refocus('bc-' + b.id); } }, b.conducta)));
+}
+function selectBehavior(id) { behSel = id; store.set('behSel', id); renderBehChips(); renderBehCard(); anim.load(id); }
+function renderBehCard() {
+  const b = BEHAVIORS.find(x => x.id === behSel), el = $('#beh-card');
+  const chosen = behAns[b.id], solved = chosen != null && b.opts[chosen] && b.opts[chosen].ok;
+  el.textContent = '';
+  el.append(h('p', { class: 'card-kicker' }, 'Tu conducta buscada'),
+    h('h3', null, b.conducta), h('p', { class: 'muted' }, '¿Qué regla de la tarea la provoca?'));
+  const list = h('div', { class: 'opts', role: 'group', 'aria-label': 'Reglas posibles' });
+  b.opts.forEach((o, i) => list.append(h('button', {
+    type: 'button', class: 'chip' + ((met.reveal || S.inst) && o.ok && chosen == null ? '' : ''), 'aria-pressed': String(chosen === i), 'data-f': 'bo-' + i,
+    onclick: () => { behAns[b.id] = i; store.set('beh', behAns); renderBehCard(); refocus('bo-' + i); } }, String.fromCharCode(65 + i) + '. ' + o.t)));
+  el.append(list);
+  const ta = h('textarea', { id: 'beh-risk', rows: '2', placeholder: 'Escribe el efecto secundario que esperas.' });
+  ta.value = behRisk[b.id] || '';
+  ta.addEventListener('input', () => { behRisk[b.id] = ta.value; store.set('behRisk', behRisk); });
+  el.append(h('label', { class: 'field', for: 'beh-risk' }, h('span', null, '¿Qué puede salir mal con esa regla? Tu idea'), ta));
+  if (chosen != null) {
+    const o = b.opts[chosen];
+    el.append(o.ok
+      ? h('div', { class: 'fb ok' }, h('b', null, '¡Esa es! '), 'La regla hace el trabajo: no hace falta pedirlo. Mira la jugada.')
+      : h('div', { class: 'fb bad' }, h('b', null, 'Todavía no. '), o.why + ' Prueba otra.'));
+  }
+  if (solved || S.inst) {
+    const okOpt = b.opts.find(x => x.ok);
+    el.append(h('div', { class: 'fb info' },
+      S.inst && !solved ? h('div', null, h('b', null, 'Regla que provoca la conducta: '), okOpt.t) : null,
+      h('div', null, h('b', null, 'Tipo de regla en la FVF: '), b.tipo),
+      h('div', null, h('b', null, 'Tiende a aparecer: '), b.aparece),
+      h('div', null, h('b', null, 'Cuidado con: '), b.cuidado)));
+  }
+  const canPlay = solved || S.inst;
+  $('#anim-play').disabled = !canPlay;
+  $('#anim-tag').textContent = canPlay ? 'Regla: ' + b.tipo : 'Elige la regla para ver la jugada';
+}
+const anim = (() => {
+  const svg = $('#anim');
+  let cur = null, raf = 0;
+  const defs = sv('defs'); defs.append(marker('am-pass', 'mk-pass'), marker('am-run', 'mk-run'));
+  const gField = sv('g'), gTrail = sv('g'), gTok = sv('g');
+  svg.append(defs, gField, gTrail, gTok);
+  const ease = t => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+  function at(f, x) {
+    const i = Math.min(Math.floor(x), f.length - 1), t = ease(Math.min(1, x - i));
+    const p = f[i], q = f[Math.min(i + 1, f.length - 1)];
+    return [p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t];
+  }
+  function drawField(sc) {
+    gField.textContent = '';
+    gField.append(sv('rect', { class: 'field', x: 0, y: 0, width: 300, height: 200, rx: 3 }));
+    if (sc.band) gField.append(sv('rect', { class: 'lane', x: 0, y: 0, width: 300, height: 14 }));
+    if (sc.lane) gField.append(sv('rect', { class: 'zone', x: sc.lane.x, y: sc.lane.y, width: sc.lane.w, height: sc.lane.h }));
+    gField.append(sv('line', { class: 'mark', x1: 150, y1: 0, x2: 150, y2: 200 }), sv('circle', { class: 'mark', cx: 150, cy: 100, r: 20 }));
+    for (const g of sc.goals) gField.append(sv('rect', { class: 'goal', x: g.x, y: g.y, width: g.w, height: g.h, rx: 1.5 }));
+  }
+  function drawAt(x) {
+    gTok.textContent = '';
+    for (const tk of cur.tokens) {
+      const [cx, cy] = at(tk.f, x), g = sv('g', { class: 'tok ' + tk.k });
+      g.append(sv('circle', { cx, cy, r: 9 }));
+      if (tk.l) { const t = sv('text', { x: cx, y: cy + 0.5 }); t.textContent = tk.l; g.append(t); }
+      gTok.append(g);
+    }
+    const [bx, by] = at(cur.ball, x);
+    gTok.append(sv('circle', { class: 'ball', cx: bx, cy: by, r: 5 }));
+  }
+  function drawTrails() {
+    gTrail.textContent = '';
+    for (const tk of cur.tokens) if (tk.trail) gTrail.append(sv('polyline', { class: 'arrow run', points: tk.f.map(p => p.join(',')).join(' '), 'marker-end': 'url(#am-run)' }));
+    for (let i = 1; i < cur.ball.length; i++) {
+      const a = cur.ball[i - 1], b = cur.ball[i];
+      if (Math.hypot(b[0] - a[0], b[1] - a[1]) > 12) gTrail.append(sv('line', { class: 'arrow pass', x1: a[0], y1: a[1], x2: b[0], y2: b[1], 'marker-end': 'url(#am-pass)' }));
+    }
+  }
+  function load(id) { cancelAnimationFrame(raf); cur = ANIMS[id]; drawField(cur); gTrail.textContent = ''; drawAt(0); }
+  function play() {
+    if (!cur) return;
+    cancelAnimationFrame(raf); gTrail.textContent = '';
+    const n = cur.ball.length - 1;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { drawAt(n); drawTrails(); return; }
+    const t0 = performance.now();
+    const step = now => { const x = Math.min(n, (now - t0) / 1100); drawAt(x); if (x < n) raf = requestAnimationFrame(step); else drawTrails(); };
+    raf = requestAnimationFrame(step);
+  }
+  function reset() { if (!cur) return; cancelAnimationFrame(raf); gTrail.textContent = ''; drawAt(0); }
+  return { load, play, reset };
+})();
+$('#anim-play').addEventListener('click', () => anim.play());
+$('#anim-reset').addEventListener('click', () => anim.reset());
+
+/* ---------- Estación 3: preguntas ---------- */
+const qAns = (() => { const v = store.get('qs', null); return Array.isArray(v) && v.length === ORDERS.length ? v : ORDERS.map(() => ({ q: '', step: '', done: false })); })();
+const saveQ = () => store.set('qs', qAns);
+const norm = t => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const OPEN_RE = /^(que|cual|cuales|donde|adonde|hacia donde|desde donde|por donde|como|cuando|quien|quienes|por que|para que|cuanto|cuanta|cuantos|cuantas|de que|de cuantas|a quien|en que|con que|y si|que tal si)\b/;
+const BAD_RE = /(no viste|no ves|no te diste|\bverdad\b|\bcierto\b|deberias|tienes que|por que no|otra vez|cuantas veces)/;
+function analyze(q) {
+  const raw = q.trim(); if (!raw) return null;
+  const n = norm(raw).replace(/^[¿¡"«\s]+/, '');
+  const words = raw.split(/\s+/).filter(Boolean).length;
+  return { short: words <= 14, open: OPEN_RE.test(n), clean: !BAD_RE.test(n) && !/^no\b/.test(n) };
+}
+const chk = (ok, y, n) => h('span', { class: ok ? 'y' : 'n' }, (ok ? '✓ ' : '✗ ') + (ok ? y : n));
+function renderLadder() {
+  const box = $('#ladder'); box.textContent = '';
+  LADDER.forEach(([n, q]) => box.append(h('div', null, h('b', null, n), h('span', null, q))));
+}
+function renderOrders() {
+  const box = $('#orders'); box.textContent = '';
+  ORDERS.forEach((o, i) => {
+    const st = qAns[i], id = 'q-' + i;
+    const card = h('article', { class: 'card' });
+    card.append(h('p', { class: 'card-kicker' }, 'Orden ' + (i + 1)), h('h3', null, '«' + o.o + '»'));
+    const ta = h('textarea', { id, rows: '2', placeholder: 'Empieza con ¿Qué…?, ¿Dónde…?, ¿Cómo…?' });
+    ta.value = st.q;
+    ta.addEventListener('input', () => { st.q = ta.value; saveQ(); });
+    const sel = h('select', { id: id + '-step' });
+    sel.append(h('option', { value: '' }, 'Elige un escalón'));
+    LADDER.forEach(([n]) => sel.append(h('option', { value: n }, n)));
+    sel.value = st.step || '';
+    sel.addEventListener('change', () => { st.step = sel.value; saveQ(); });
+    const out = h('div', { class: 'field', 'aria-live': 'polite' });
+    function fill() {
+      out.textContent = '';
+      if (!st.done) return;
+      const r = analyze(st.q);
+      if (!r) { out.append(h('div', { class: 'fb info' }, 'Escribe tu pregunta primero.')); return; }
+      out.append(h('div', { class: 'checks' }, chk(r.short, 'Corta', 'Larga: recórtala'), chk(r.open, 'Abierta', 'Parece de sí o no'), chk(r.clean, 'Sin reproche ni respuesta', 'Trae un reproche o la respuesta')),
+        h('p', { class: 'muted small' }, 'Revisión orientativa: la página mira la forma, no el fondo. Tú decides.'),
+        h('p', { class: 'card-kicker' }, 'Ejemplos'),
+        h('div', { class: 'models' }, o.m.map(([stp, q]) => h('p', null, '«' + q + '» ', h('span', { class: 'tag' }, stp)))));
+    }
+    card.append(h('label', { class: 'field', for: id }, h('span', null, 'Tu pregunta'), ta),
+      h('label', { class: 'field', for: id + '-step' }, h('span', null, '¿En qué escalón está?'), sel),
+      h('div', { class: 'row' }, h('button', { type: 'button', class: 'btn primary', onclick: () => { st.done = true; saveQ(); fill(); } }, 'Revisar')),
+      out);
+    fill();
+    box.append(card);
+  });
+}
+let waitTimer = 0;
+$('#wait-btn').addEventListener('click', () => {
+  clearInterval(waitTimer);
+  const arc = $('#wait-arc'), num = $('#wait-num'), msg = $('#wait-msg'), btn = $('#wait-btn'), C = 251.3, t0 = performance.now();
+  btn.disabled = true; msg.textContent = 'Silencio… deja que piensen.';
+  waitTimer = setInterval(() => {
+    const left = Math.max(0, 3 - (performance.now() - t0) / 1000);
+    num.textContent = left > 0 ? String(Math.ceil(left)) : '✓';
+    arc.setAttribute('stroke-dashoffset', String(C * (1 - left / 3)));
+    if (left <= 0) {
+      clearInterval(waitTimer);
+      msg.textContent = 'Ahora sí: escucha la respuesta. ¿Fue más larga que de costumbre?';
+      btn.disabled = false; btn.textContent = 'Otra vez';
+    }
+  }, 50);
+});
+
+/* ---------- Estación 4: progresión ---------- */
+const prog = Object.assign({ vals: {}, ok: {}, order: {}, factor: null, why: '' }, store.get('prog', {}));
+const saveProg = () => store.set('prog', prog);
+function densBar(v) {
+  return h('div', { class: 'dens' },
+    h('div', { class: 'track' }, h('i', { style: 'width:' + Math.min(100, v) + '%' }), h('u')),
+    h('small', { class: 'tnum' }, fmt(v) + ' m² por jugador · partido: 80 m²'));
+}
+function renderPTasks() {
+  const box = $('#ptasks'); box.textContent = '';
+  PTASKS.forEach(t => {
+    const id = 'pt-' + t.id, exact = t.l * t.w / t.n;
+    const card = h('article', { class: 'card' });
+    card.append(h('p', { class: 'card-kicker' }, 'Tarea ' + t.id.slice(1)), h('h3', null, t.name), h('p', null, t.desc),
+      h('p', { class: 'muted small tnum' }, t.l + ' × ' + t.w + ' m · ' + t.n + ' jugadores'));
+    const inp = h('input', { id, type: 'text', inputmode: 'decimal', autocomplete: 'off', placeholder: 'm² por jugador' });
+    inp.value = prog.vals[t.id] || '';
+    const out = h('div', { 'aria-live': 'polite' });
+    function check() {
+      out.textContent = '';
+      const v = parseFloat(String(inp.value).replace(',', '.'));
+      if (isNaN(v)) { out.append(h('div', { class: 'fb info' }, 'Escribe un número. Pista: ' + t.l + ' × ' + t.w + ' ÷ ' + t.n + '.')); return; }
+      const ok = Math.abs(v - exact) <= 1;
+      prog.ok[t.id] = ok; saveProg();
+      out.append(h('div', { class: 'fb ' + (ok ? 'ok' : 'bad') }, h('b', null, ok ? '¡Correcto! ' : 'Revisa. '),
+        t.l + ' × ' + t.w + ' = ' + (t.l * t.w) + ' m² ÷ ' + t.n + ' jugadores = ' + fmt(exact) + ' m² por jugador.'), densBar(exact));
+    }
+    inp.addEventListener('input', () => { prog.vals[t.id] = inp.value; saveProg(); });
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') check(); });
+    card.append(h('label', { class: 'field', for: id }, h('span', null, 'Tu cálculo'), inp),
+      h('div', { class: 'row' }, h('button', { type: 'button', class: 'btn primary', onclick: check }, 'Comprobar')), out);
+    if (prog.ok[t.id] != null && prog.vals[t.id]) check();
+    box.append(card);
+  });
+}
+const ORDER_TEXT = 'La tarea 1 es la más simple: 3 contra 1, un defensor que solo intercepta y más metros por jugador (56). La tarea 3 sube la oposición: dos defensores presionan, aunque el comodín da superioridad. La tarea 2 es la más compleja: 3 contra 3 en igualdad, con porteros; es la más parecida al partido. La tarea 3 y la 2 tienen la misma densidad (50 m²): la densidad no lo es todo.';
+function renderOrder() {
+  const box = $('#order-sel'); box.textContent = '';
+  PTASKS.forEach(t => {
+    const id = 'ord-' + t.id, sel = h('select', { id });
+    sel.append(h('option', { value: '' }, 'Elige la posición'));
+    ['1.º · la más simple', '2.º · intermedia', '3.º · la más compleja'].forEach((lab, i) => sel.append(h('option', { value: String(i + 1) }, lab)));
+    sel.value = prog.order[t.id] || '';
+    sel.addEventListener('change', () => { prog.order[t.id] = sel.value; saveProg(); });
+    box.append(h('label', { class: 'field', for: id }, h('span', null, 'Tarea ' + t.id.slice(1) + ' · ' + t.name), sel));
+  });
+}
+function orderFeedback(showAnswer) {
+  const fb = $('#order-fb'); fb.textContent = '';
+  const vals = PTASKS.map(t => prog.order[t.id]);
+  if (!showAnswer) {
+    if (vals.some(v => !v)) { fb.append(h('div', { class: 'fb info' }, 'Elige una posición para cada tarea.')); return; }
+    if (new Set(vals).size < 3) { fb.append(h('div', { class: 'fb info' }, 'Usa cada posición una sola vez.')); return; }
+    const ok = PTASKS.every(t => String(t.pos) === prog.order[t.id]);
+    if (!ok) {
+      fb.append(h('div', { class: 'fb bad' }, h('b', null, 'Todavía no. '), 'Pista: mira la relación numérica y si hay porteros, no solo los metros.'),
+        h('div', { class: 'row' }, h('button', { type: 'button', class: 'btn', onclick: () => orderFeedback(true) }, 'Ver la respuesta')));
+      return;
+    }
+    fb.append(h('div', { class: 'fb ok' }, h('b', null, '¡Bien ordenadas! '), 'Tarea 1 → Tarea 3 → Tarea 2.'));
+  }
+  fb.append(h('div', { class: 'fb info' }, h('b', null, 'Tarea 1 → Tarea 3 → Tarea 2. '), ORDER_TEXT));
+}
+$('#order-check').addEventListener('click', () => orderFeedback(false));
+function renderFactors() {
+  const box = $('#factor-chips'); box.textContent = '';
+  FACTORS.forEach(([n], i) => box.append(h('button', { type: 'button', class: 'chip', 'aria-pressed': String(prog.factor === i), 'data-f': 'fac-' + i,
+    onclick: () => { prog.factor = i; saveProg(); renderFactors(); refocus('fac-' + i); } }, n)));
+  const fb = $('#factor-fb'); fb.textContent = '';
+  if (prog.factor != null && FACTORS[prog.factor]) {
+    fb.append(h('div', { class: 'fb info' }, h('b', null, FACTORS[prog.factor][0] + '. '), FACTORS[prog.factor][1]),
+      h('p', { class: 'muted small' }, 'Regla de oro: sube uno o dos factores por nivel. Si casi siempre sale, sube; si casi nunca sale, baja.'));
+  }
+}
+$('#factor-why').value = prog.why || '';
+$('#factor-why').addEventListener('input', e => { prog.why = e.target.value; saveProg(); });
+function calc() {
+  const l = parseFloat($('#calc-l').value), w = parseFloat($('#calc-w').value), n = parseFloat($('#calc-n').value), out = $('#calc-out');
+  out.textContent = '';
+  if (!(l > 0 && w > 0 && n > 0)) { out.append(h('p', { class: 'muted' }, 'Escribe largo, ancho y jugadores.')); return; }
+  const v = l * w / n;
+  out.append(h('p', { class: 'formula tnum' }, fmt(l) + ' × ' + fmt(w) + ' ÷ ' + fmt(n) + ' = ' + fmt(v) + ' m² por jugador'), densBar(v),
+    h('p', { class: 'muted small' }, v > 85 ? 'Más espacio que en el partido: más tiempo para decidir.' : v >= 75 ? 'Parecido al partido.' : 'Menos espacio que en el partido: menos tiempo para decidir.'));
+}
+['calc-l', 'calc-w', 'calc-n'].forEach(id => $('#' + id).addEventListener('input', calc));
+
+/* ---------- Laboratorio ---------- */
+const lab = Object.assign({ cont: '', lv: [{}, {}, {}], chk: [] }, store.get('lab', {}));
+if (!Array.isArray(lab.lv) || lab.lv.length !== 3) lab.lv = [{}, {}, {}];
+if (!Array.isArray(lab.chk)) lab.chk = [];
+const saveLab = () => store.set('lab', lab);
+function dl(L) { const l = parseFloat(L.l), w = parseFloat(L.w), n = parseFloat(L.n); return l > 0 && w > 0 && n > 0 ? l * w / n : null; }
+function renderLab() {
+  const box = $('#lab-levels'); box.textContent = '';
+  lab.lv.forEach((L, i) => {
+    const p = 'lab-l' + (i + 1) + '-', ex = LAB_EXAMPLE.lv[i];
+    const card = h('article', { class: 'card level l' + (i + 1) });
+    card.append(h('h3', null, 'Nivel ' + (i + 1), h('span', { class: 'tag' }, LEVEL_NAMES[i])));
+    const dOut = h('div');
+    const upd = () => {
+      dOut.textContent = '';
+      const v = dl(L);
+      dOut.append(v != null ? densBar(v) : h('p', { class: 'muted small' }, 'Escribe las medidas y los jugadores para ver los m² por jugador.'));
+      renderChecks();
+    };
+    const f = (key, label, el) => {
+      el.id = p + key; el.value = L[key] == null ? '' : L[key];
+      el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', () => { L[key] = el.value; saveLab(); if (key === 'l' || key === 'w' || key === 'n') upd(); });
+      return h('label', { class: 'field', for: el.id }, h('span', null, label), el);
+    };
+    const sel = h('select'); sel.append(h('option', { value: '' }, 'Elige un factor'));
+    LAB_FACTORS.forEach(n => sel.append(h('option', { value: n }, n)));
+    card.append(
+      f('org', 'Organización', h('textarea', { rows: '2', placeholder: 'Ej.: ' + ex.org })),
+      h('div', { class: 'inputs' },
+        f('l', 'Largo (m)', h('input', { type: 'number', inputmode: 'decimal', min: '1', placeholder: String(ex.l) })),
+        f('w', 'Ancho (m)', h('input', { type: 'number', inputmode: 'decimal', min: '1', placeholder: String(ex.w) })),
+        f('n', 'Jugadores', h('input', { type: 'number', inputmode: 'numeric', min: '1', placeholder: String(ex.n) }))),
+      dOut,
+      f('regla', 'Regla de provocación', h('textarea', { rows: '2', placeholder: 'Ej.: ' + ex.regla })),
+      f('factor', 'Factor que sube', sel),
+      f('p1', 'Pregunta 1', h('input', { type: 'text', placeholder: 'Ej.: ' + ex.p1 })),
+      f('p2', 'Pregunta 2', h('input', { type: 'text', placeholder: 'Ej.: ' + ex.p2 })));
+    box.append(card);
+    upd();
+  });
+}
+function renderChecks() {
+  const box = $('#lab-check'); box.textContent = '';
+  const allDims = lab.lv.every(L => dl(L) != null), last = dl(lab.lv[2]);
+  CHECKS.forEach((c, i) => {
+    const id = 'chk-' + i, cb = h('input', { type: 'checkbox', id });
+    if (i === 2) { cb.checked = allDims; cb.disabled = true; }
+    else { cb.checked = !!lab.chk[i]; cb.addEventListener('change', () => { lab.chk[i] = cb.checked; saveLab(); }); }
+    const extra = i === 2 ? h('small', { class: 'muted' }, allDims ? ' La página ya los calculó.' : ' Se marca solo cuando completes las medidas de los tres niveles.')
+      : i === 4 && last != null ? h('small', { class: 'muted' }, ' Tu nivel 3: ' + fmt(last) + ' m² por jugador; el partido: 80.') : null;
+    box.append(h('label', { for: id }, cb, h('span', null, c, extra)));
+  });
+}
+function labText() {
+  const L = [];
+  L.push('LABORATORIO DE TRANSFORMACIÓN');
+  L.push('Ejercicio de partida: pase y sigue en 10 x 10 m');
+  L.push('Contenido: ' + (lab.cont || '—'));
+  lab.lv.forEach((v, i) => {
+    const d = dl(v);
+    L.push('', 'NIVEL ' + (i + 1) + ' · ' + LEVEL_NAMES[i].toUpperCase());
+    L.push('• Organización: ' + (v.org || '—'));
+    L.push('• Espacio: ' + (d != null ? v.l + ' x ' + v.w + ' m · ' + v.n + ' jugadores · ' + fmt(d) + ' m² por jugador' : '—'));
+    L.push('• Regla de provocación: ' + (v.regla || '—'));
+    L.push('• Factor que sube: ' + (v.factor || '—'));
+    L.push('• Preguntas: ' + ([v.p1, v.p2].filter(Boolean).join(' / ') || '—'));
+  });
+  const allDims = lab.lv.every(v => dl(v) != null);
+  const done = CHECKS.filter((c, i) => i === 2 ? allDims : lab.chk[i]);
+  L.push('', 'Cumple: ' + (done.length ? done.join(' · ') : '—'));
+  return L.join('\n');
+}
+$('#lab-cont').value = lab.cont || '';
+$('#lab-cont').addEventListener('input', e => { lab.cont = e.target.value; saveLab(); });
+$('#lab-copy').addEventListener('click', () => {
+  const txt = labText(), out = $('#lab-out'), msg = $('#lab-copy-msg');
+  out.value = txt;
+  const fallback = () => { out.hidden = false; out.focus(); out.select(); msg.textContent = 'Selecciona el texto de abajo y cópialo.'; };
+  try {
+    navigator.clipboard.writeText(txt).then(() => { msg.textContent = 'Ficha copiada. Pégala en el chat.'; out.hidden = true; }, fallback);
+  } catch (e) { fallback(); }
+});
+function armButton(btn, label, action) {
+  let armed = 0;
+  btn.addEventListener('click', () => {
+    const hasData = lab.cont || lab.lv.some(v => Object.values(v).some(Boolean));
+    if (!hasData) { action(); return; }
+    if (!armed) { btn.textContent = '¿Seguro? Toca otra vez'; armed = setTimeout(() => { armed = 0; btn.textContent = label; }, 3000); return; }
+    clearTimeout(armed); armed = 0; btn.textContent = label; action();
+  });
+}
+armButton($('#lab-example'), 'Cargar ejemplo', () => {
+  lab.cont = LAB_EXAMPLE.cont;
+  lab.lv = LAB_EXAMPLE.lv.map(o => ({ org: o.org, l: String(o.l), w: String(o.w), n: String(o.n), regla: o.regla, factor: o.factor, p1: o.p1, p2: o.p2 }));
+  saveLab(); $('#lab-cont').value = lab.cont; renderLab();
+});
+armButton($('#lab-clear'), 'Borrar ficha', () => {
+  lab.cont = ''; lab.lv = [{}, {}, {}]; lab.chk = [];
+  saveLab(); $('#lab-cont').value = ''; renderLab();
+});
+
+/* ---------- Arranque ---------- */
+function init() {
+  setBig(S.big);
+  renderCardPickers(); renderSecret(); board.load(); renderCounters(); renderTallies();
+  renderMetDefs(); renderTasks();
+  const bs = store.get('behSel', null);
+  selectBehavior((BEHAVIORS.find(b => b.id === bs) || BEHAVIORS[0]).id);
+  renderLadder(); renderOrders();
+  renderPTasks(); renderOrder(); renderFactors(); calc();
+  renderLab();
+  setInst(S.inst);
+  setTimer(PRESETS.inicio[0][1], PRESETS.inicio[0][0]);
+  showStation(location.hash.slice(1) || 'inicio');
+}
+init();
+
+</script>
+</body>
+</html>

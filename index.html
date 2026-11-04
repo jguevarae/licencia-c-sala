@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Licencia C Sala · Sesión 5</title>
+<meta name="description" content="Actividades interactivas de la Sesión 5 · Unidad 2 · Licencia C Sala.">
+<meta property="og:title" content="Licencia C Sala · Sesión 5">
+<meta property="og:description" content="Laboratorio del Clima y Laboratorio de Métodos: abre la actividad de cada parte de la clase.">
+<link rel="icon" type="image/png" href="escudo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Saira:wght@600;700;800&display=swap">
+<style>
+/* Portada de la sesión: misma banda azul CCD y tarjetas claras que los laboratorios. */
+:root{
+  --bg:#E8EDF5; --surface:#FBFCFE; --ink:#14213A; --muted:#4B5870; --line:#D2DBE7;
+  --blue:#0046A0; --blue-ink:#0046A0; --blue-mid:#7FA8DD;
+  --band:#00377A; --band-ink:#F3F5F9; --band-muted:#C9D6EA; --crest-bg:#F3F5F9;
+  --wine:#4A172A; --wine-ink:#4A172A; --on-dark:#F3F5F9; --gold:#F2B035;
+  --shadow:0 1px 2px rgba(12,32,64,.06), 0 10px 28px rgba(12,32,64,.08);
+  --f-display:'Saira', 'Arial Narrow', Arial, sans-serif;
+  --f-body:'Barlow', 'Segoe UI', Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root{
+  --bg:#0A1322; --surface:#111D31; --ink:#E7EDF6; --muted:#A3B1C7; --line:#2A3B58;
+  --blue:#2D69C2; --blue-ink:#8DB8F2; --blue-mid:#2A4F86;
+  --band:#0B2A5C; --band-muted:#B5C5DE;
+  --wine:#6A2540; --wine-ink:#EDB0C5;
+  --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 28px rgba(0,0,0,.35);
+  color-scheme:dark; } }
+*, *::before, *::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; }
+html, body{ margin:0; padding:0; }
+body{ min-height:100vh; min-height:100dvh; display:flex; flex-direction:column; background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:1.0625rem; line-height:1.5; }
+h1, h2, p{ margin:0; }
+.wrap{ width:100%; max-width:720px; margin-inline:auto; padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); }
+.top{ background:var(--band); color:var(--band-ink); padding-top:env(safe-area-inset-top, 0px); }
+.top .wrap{ display:flex; align-items:center; gap:16px; padding-block:20px; }
+.crest{ width:64px; height:64px; border-radius:16px; background:var(--crest-bg); display:grid; place-items:center; flex:none; }
+.crest img{ width:44px; height:auto; display:block; }
+.brand{ min-width:0; }
+.brand h1{ font-family:var(--f-display); font-size:1.6rem; font-weight:700; line-height:1.1; }
+.brand p{ margin-top:4px; font-size:.95rem; color:var(--band-muted); }
+main{ flex:1; padding-block:28px 40px; }
+.intro{ font-size:1.15rem; font-weight:500; margin-bottom:18px; }
+.cards{ display:grid; gap:16px; }
+.card{ display:flex; align-items:center; gap:16px; padding:20px; border-radius:16px; background:var(--surface); border:1px solid var(--line); box-shadow:var(--shadow); color:inherit; text-decoration:none; -webkit-tap-highlight-color:transparent; transition:border-color .15s ease, transform .15s ease; }
+.card:hover{ border-color:var(--blue-mid); }
+.card:active{ transform:scale(.985); }
+.card:focus-visible{ outline:3px solid var(--gold); outline-offset:3px; }
+.ico{ width:56px; height:56px; border-radius:50%; display:grid; place-items:center; flex:none; color:var(--on-dark); }
+.ico svg{ width:28px; height:28px; }
+.clima .ico{ background:var(--wine); }
+.metodos .ico{ background:var(--blue); }
+.txt{ flex:1; min-width:0; }
+.time{ font-family:var(--f-display); font-size:.8rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--blue-ink); }
+.card h2{ margin-top:2px; font-family:var(--f-display); font-size:1.35rem; font-weight:700; line-height:1.2; color:var(--wine-ink); }
+.sub{ color:var(--muted); }
+.go{ width:24px; height:24px; flex:none; color:var(--blue-ink); }
+.tip{ margin-top:24px; font-size:.95rem; color:var(--muted); }
+footer{ border-top:1px solid var(--line); }
+footer .wrap{ padding-block:16px; font-size:.85rem; color:var(--muted); }
+@media (prefers-reduced-motion: reduce){ .card{ transition:none; } .card:active{ transform:none; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="crest"><img src="escudo.png" alt="Escudo del Centro de Capacitación y Desarrollo de la FVF" width="171" height="200"></div>
+    <div class="brand">
+      <h1>Licencia C Sala</h1>
+      <p>Unidad 2 · Sesión 5 · Jueves 5 de noviembre</p>
+    </div>
+  </div>
+</header>
+<main class="wrap">
+  <p class="intro">Abre la actividad de la parte de la clase que estamos viendo.</p>
+  <div class="cards">
+    <a class="card clima" href="clima/">
+      <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span>
+      <div class="txt">
+        <p class="time">6:00 a 7:30 p. m.</p>
+        <h2>Laboratorio del Clima</h2>
+        <p class="sub">Componentes psicopedagógicos</p>
+      </div>
+      <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+    </a>
+    <a class="card metodos" href="metodos/">
+      <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg></span>
+      <div class="txt">
+        <p class="time">7:45 a 9:15 p. m.</p>
+        <h2>Laboratorio de Métodos</h2>
+        <p class="sub">Métodos de entrenamiento</p>
+      </div>
+      <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+    </a>
+  </div>
+  <p class="tip">Deja la página abierta durante la clase. Lo que escribes se guarda solo en tu teléfono o computadora: no se envía a ningún lado.</p>
+</main>
+<footer><div class="wrap">Centro de Capacitación y Desarrollo · Federación Venezolana de Fútbol</div></footer>
+</body>
+</html>
