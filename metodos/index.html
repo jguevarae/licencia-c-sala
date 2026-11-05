@@ -451,7 +451,6 @@ body:not(.inst) .card:has(> [data-tally]){ display:none; }
           <button class="btn primary" type="button" id="anim-play">Ver la jugada</button>
           <button class="btn" type="button" id="anim-reset">Volver al inicio</button>
         </div>
-        <p class="muted small" id="anim-msg" role="status"></p>
         <p class="legend"><span><i class="l-att"></i>Ataque</span><span><i class="l-def"></i>Defensa</span><span><i class="l-joker"></i>Comodín</span><span>— pase · - - desmarque</span></p>
       </div>
     </div>
@@ -1270,14 +1269,8 @@ function renderBehCard() {
       h('div', null, h('b', null, 'Tiende a aparecer: '), b.aparece),
       h('div', null, h('b', null, 'Cuidado con: '), b.cuidado)));
   }
-  /* La jugada se desbloquea al acertar la regla (o en modo instructor). El botón nunca queda mudo:
-     bloqueado, dice qué falta y lleva a las reglas. */
-  const canPlay = solved || S.inst, btn = $('#anim-play');
-  btn.setAttribute('aria-disabled', String(!canPlay));
-  btn.classList.toggle('primary', canPlay);
-  btn.textContent = canPlay ? 'Ver la jugada' : 'Elige la regla primero';
-  $('#anim-msg').textContent = '';
-  $('#anim-tag').textContent = canPlay ? 'Regla: ' + b.tipo : 'Se activa al acertar la regla';
+  /* La jugada se puede ver siempre. El tipo de regla solo se muestra al acertar (o en modo instructor). */
+  $('#anim-tag').textContent = solved || S.inst ? 'Regla: ' + b.tipo : '¿Qué regla la provoca?';
 }
 const anim = (() => {
   const svg = $('#anim');
@@ -1287,7 +1280,7 @@ const anim = (() => {
   svg.append(defs, gField, gTrail, gTok);
   const ease = t => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
   function at(f, x) {
-    const i = Math.min(Math.floor(x), f.length - 1), t = ease(Math.min(1, x - i));
+    const i = Math.max(0, Math.min(Math.floor(x), f.length - 1)), t = ease(Math.max(0, Math.min(1, x - i)));
     const p = f[i], q = f[Math.min(i + 1, f.length - 1)];
     return [p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t];
   }
@@ -1325,23 +1318,14 @@ const anim = (() => {
     const n = cur.ball.length - 1;
     if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { drawAt(n); drawTrails(); return; }
     const t0 = performance.now();
-    const step = now => { const x = Math.min(n, (now - t0) / 1100); drawAt(x); if (x < n) raf = requestAnimationFrame(step); else drawTrails(); };
+    /* El primer cuadro puede traer una hora anterior al clic: sin este Math.max la jugada se rompía en Chrome de escritorio. */
+    const step = now => { const x = Math.max(0, Math.min(n, (now - t0) / 1100)); drawAt(x); if (x < n) raf = requestAnimationFrame(step); else drawTrails(); };
     raf = requestAnimationFrame(step);
   }
   function reset() { if (!cur) return; cancelAnimationFrame(raf); gTrail.textContent = ''; drawAt(0); }
   return { load, play, reset };
 })();
-$('#anim-play').addEventListener('click', () => {
-  if ($('#anim-play').getAttribute('aria-disabled') === 'true') {
-    $('#anim-msg').textContent = 'La jugada se activa cuando eliges la regla correcta. Elígela en la tarjeta de tu conducta.';
-    const card = $('#beh-card'), first = card.querySelector('.opts button');
-    card.scrollIntoView({ behavior: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
-    if (first) first.focus({ preventScroll: true });
-    return;
-  }
-  $('#anim-msg').textContent = '';
-  anim.play();
-});
+$('#anim-play').addEventListener('click', () => anim.play());
 $('#anim-reset').addEventListener('click', () => anim.reset());
 
 /* ---------- Estación 3: preguntas ---------- */
