@@ -216,13 +216,13 @@ svg.court{ display:block; width:100%; height:auto; }
 .l-att{ background:var(--att); }
 .l-def{ background:var(--def); }
 .l-joker{ background:var(--wild); }
-.l-focal{ background:transparent; box-shadow:0 0 0 2.5px var(--gold) inset; }
+.l-focal{ background:transparent; box-shadow:0 0 0 2.5px var(--att) inset; }
 .simbox{ scroll-margin-top:72px; display:flex; flex-direction:column; gap:12px; width:100%; max-width:560px; margin-inline:auto; }
 .timebar{ height:10px; border-radius:5px; background:var(--surface-2); overflow:hidden; }
 .timebar i{ display:block; height:100%; width:0; background:var(--gold); }
-.hold{ width:100%; min-height:84px; border-radius:18px; border:3px solid var(--blue); background:var(--surface); color:var(--blue-ink); font-family:var(--f-display); font-weight:800; font-size:1.25rem; touch-action:none; user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; }
+.hold{ width:100%; min-height:84px; border-radius:18px; border:3px solid var(--gold); background:#00377A; color:var(--gold); font-family:var(--f-display); font-weight:800; font-size:1.25rem; touch-action:none; user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; }
 .hold.on{ background:var(--gold); border-color:var(--gold); color:var(--gold-ink); }
-.hold:disabled{ opacity:.45; cursor:default; }
+.hold:disabled{ opacity:.7; cursor:default; }
 .tasksel{ display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px; }
 .tasksel button{ border:2px solid var(--line); background:var(--surface-2); border-radius:14px; padding:10px 12px; text-align:left; font-weight:600; line-height:1.3; display:flex; flex-direction:column; gap:2px; }
 .tasksel button b{ font-family:var(--f-display); font-size:1.05rem; color:var(--blue-ink); }
@@ -365,7 +365,7 @@ svg.court{ display:block; width:100%; height:auto; }
     <div class="st-head">
       <p class="kicker">Inicio · El cronómetro oculto · 14 minutos</p>
       <h2 id="h-inicio">¿Cuánto juega de verdad un niño?</h2>
-      <p class="lead">Vas a ser el cronómetro. Mira dos tareas de un minuto y mide cuántos segundos tiene el balón un solo niño, el que lleva el anillo dorado.</p>
+      <p class="lead">Vas a ser el cronómetro. Mira dos tareas de un minuto y mide cuántos segundos tiene el balón un solo niño, el que lleva el anillo.</p>
     </div>
     <ol class="steps">
       <li><span class="num">1</span><span>Haz tu predicción y guárdala.</span></li>
@@ -449,7 +449,7 @@ svg.court{ display:block; width:100%; height:auto; }
     <article class="card" id="ord-card">
       <div class="card-head"><p class="card-kicker">Actividad 1 · Ordena la sesión</p><span class="tag wait" id="ord-tag">Sin revisar</span></div>
       <h3>Sesión Sub-9 de 60 minutos. Objetivo: desmarcarse para recibir</h3>
-      <p class="muted">A cada actividad, ponle su fase. Ojo: dos de ellas no van en esta sesión.</p>
+      <p class="muted">A cada actividad, ponle su fase. Ojo: dos de ellas no aplican en esta sesión.</p>
       <div class="items" id="ord-items"></div>
       <div class="item" id="ord-seq">
         <p>Las tres tareas de la parte principal, ¿en qué orden van, de lo simple a lo complejo?</p>
@@ -503,9 +503,9 @@ svg.court{ display:block; width:100%; height:auto; }
     </article>
 
     <article class="card" id="per-card">
-      <div class="card-head"><p class="card-kicker">Actividad 4 · Las tres perillas</p><span class="tag wait" id="per-tag">Sin revisar</span></div>
+      <div class="card-head"><p class="card-kicker">Actividad 4 · Las tres variables</p><span class="tag wait" id="per-tag">Sin revisar</span></div>
       <h3>La tarea base: 4 contra 4 en la cancha de 40 x 20, sin reglas especiales</h3>
-      <p class="muted">Ajusta las tres perillas para que la tarea sirva a un grupo Sub-8 y después a un grupo Sub-12. El contenido es el mismo: superar a un rival y llegar al gol.</p>
+      <p class="muted">Ajusta las tres variables para que la tarea sirva a un grupo Sub-8 y después a un grupo Sub-12. El contenido es el mismo: superar a un rival y llegar al gol.</p>
       <div class="seg" role="group" aria-label="Grupo que estás ajustando" id="per-band">
         <button type="button" data-band="s8" aria-pressed="true">Para Sub-8</button>
         <button type="button" data-band="s12" aria-pressed="false">Para Sub-12</button>
@@ -721,7 +721,7 @@ const ST_NAMES = { inicio:'Inicio', fases:'1 · Fases', franjas:'2 · Edades', c
 const PRESETS = {
   inicio: [['Predicción',60],['Tarea A',75],['Tarea B',75],['Debate',300]],
   fases: [['Ordenar',240],['Coherencia',300],['Plenaria',240]],
-  franjas: [['Franjas',180],['Perillas',360],['Plenaria',240]],
+  franjas: [['Franjas',180],['Variables',360],['Plenaria',240]],
   carga: [['Bloque',300],['Semáforo',240],['Plenaria',240]],
   compromiso: [['Muestreo',240],['¿Qué harías?',240],['Plenaria',240]],
   taller: [['Taller',480],['Ticket',180],['Plenaria',240]],
@@ -739,7 +739,7 @@ const ACTS = [
   ['orden','Ordenar la sesión','fases'],
   ['cohe','Prueba de coherencia','fases'],
   ['franja','¿De qué franja es?','franjas'],
-  ['perilla','Las tres perillas','franjas'],
+  ['perilla','Las tres variables','franjas'],
   ['bloque','Bloque de 12 minutos','carga'],
   ['sema','Semáforo del grupo','carga'],
   ['muestra','Planilla de muestreo','compromiso'],
@@ -751,19 +751,19 @@ const ACT_NAME = Object.fromEntries(ACTS.map(a => [a[0], a[1]]));
 ACT_NAME.entrada = 'Registro'; ACT_NAME.nav = 'Navegación'; ACT_NAME.resumen = 'Resumen';
 
 /* Estación 1 · Ordenar la sesión (Sub-9, desmarcarse para recibir) */
-const FASE_OPTS = [['act','Activación'],['pri','Parte principal'],['cie','Cierre'],['no','No va']];
+const FASE_OPTS = [['act','Activación'],['pri','Parte principal'],['cie','Cierre'],['no','No aplica']];
 const FASES = [
   { id:'f4', t:'2 contra 2 con dos comodines de banda, en canchas de 20 x 20 m', a:'pri', why:'Parte principal: el mismo desmarque, ahora con igualdad numérica.' },
-  { id:'f7', t:'Trote de 15 minutos alrededor de la cancha, sin balón', a:'no', why:'No va: sin balón ni decisiones, no prepara nada de la parte principal. Es tiempo perdido.' },
+  { id:'f7', t:'Trote de 15 minutos alrededor de la cancha, sin balón', a:'no', why:'No aplica: sin balón ni decisiones, no prepara nada de la parte principal. Es tiempo perdido.' },
   { id:'f1', t:'Pases de colores: antes de recibir, el niño busca un espacio libre y dice el color del cono más cercano', a:'act', why:'Activación: con balón, despierta la misma percepción que pedirá la parte principal, mirar antes de recibir.' },
-  { id:'f6', t:'Conducción suave y Ronda de Reflexión Vinotinto: «¿Quién te ayudó a recibir?»', a:'cie', why:'Cierre: baja el pulso y fija la idea del día y un valor.' },
+  { id:'f6', t:'Conducción lenta y Ronda de Reflexión Vinotinto: «¿Quién te dio una asistencia a gol?»', a:'cie', why:'Cierre: baja el pulso y fija la idea del día y un valor.' },
   { id:'f3', t:'3 contra 1 en cuadrados de 10 x 10 m; el defensor cambia cada 90 segundos', a:'pri', why:'Parte principal: el desmarque con superioridad, lo más simple.' },
-  { id:'f8', t:'Explicación de 10 minutos en la pizarra, con los niños sentados', a:'no', why:'No va: la atención del niño a una explicación dura de 30 a 60 segundos. Consigna corta y a jugar.' },
-  { id:'f5', t:'3 contra 3 a porterías pequeñas: el gol vale doble si el último pase llegó a quien se desmarcó', a:'pri', why:'Parte principal: el desmarque dentro del juego real, lo más complejo.' },
+  { id:'f8', t:'Explicación de 10 minutos en la pizarra, con los niños sentados', a:'no', why:'No aplica: la atención del niño a una explicación dura de 30 a 60 segundos. Consigna corta y a jugar.' },
+  { id:'f5', t:'3 contra 3 con porterías pequeñas: el gol vale doble si el último pase llegó a quien se desmarcó', a:'pri', why:'Parte principal: el desmarque dentro del juego real, lo más complejo.' },
   { id:'f2', t:'«Roba colas» con un balón por niño y, al final de cada ronda, un salto con aterrizaje en un pie', a:'act', why:'Activación: sube el pulso jugando y prepara tobillos y rodillas para frenar, girar y aterrizar.' }
 ];
 /* Las tres tareas principales, de lo simple a lo complejo: f3, f4, f5 */
-const SEQ = [['f3','3 contra 1 en cuadrados'],['f4','2 contra 2 con comodines'],['f5','3 contra 3 a porterías pequeñas']];
+const SEQ = [['f3','3 contra 1 en cuadrados'],['f4','2 contra 2 con comodines'],['f5','3 contra 3 con porterías pequeñas']];
 const SEQ_SHOW = ['f5','f3','f4'];
 
 /* Estación 1 · La prueba de coherencia */
@@ -798,7 +798,7 @@ const FRANJA_OPTS = [['s7','Sub-7 y Sub-8'],['s9','Sub-9 a Sub-11'],['s12','Sub-
 const FRANJAS = [
   { id:'c6', t:'4 contra 4 + porteros: quien pierde el balón presiona 5 segundos', a:'s12', why:'Sub-12 y Sub-13: transiciones, roles y oposición plena.' },
   { id:'c1', t:'«Roba colas» con un balón por niño', a:'s7', why:'Sub-7 y Sub-8: juego global, «yo y mi balón».' },
-  { id:'c3', t:'2 contra 1 hacia la línea, con la pregunta «¿cuándo conviene pasar?»', a:'s9', why:'Sub-9 a Sub-11: cooperación con superioridad y una pregunta de descubrimiento.' },
+  { id:'c3', t:'2 contra 1, con la pregunta «¿cuándo conviene pasar?»', a:'s9', why:'Sub-9 a Sub-11: cooperación con superioridad y una pregunta de descubrimiento.' },
   { id:'c8', t:'El gol en los 6 segundos siguientes a una recuperación vale doble', a:'s12', why:'Sub-12 y Sub-13: una regla con condición de tiempo, propia de los mayores.' },
   { id:'c2', t:'1 contra 1 en carriles: gol si paras el balón con la planta sobre la línea', a:'s7', why:'Sub-7 y Sub-8: duelo simple, una sola regla y mucho balón por niño.' },
   { id:'c5', t:'2 contra 2 con dos comodines de banda: gol solo después de un pase', a:'s9', why:'Sub-9 a Sub-11: dos reglas como máximo y una superioridad que se iguala.' },
@@ -806,7 +806,7 @@ const FRANJAS = [
   { id:'c4', t:'Rondo 3 contra 1 buscando triangulaciones', a:'s9', why:'Sub-9 a Sub-11: triangulaciones y superioridad, resolver con un compañero.' }
 ];
 
-/* Estación 2 · Las tres perillas (el orden de las opciones está mezclado a propósito) */
+/* Estación 2 · Las tres variables (el orden de las opciones está mezclado a propósito) */
 const PERILLAS = [
   { k:'regla', t:'Reglas de provocación', o:[
     ['r2','Dos reglas: gol solo después de un pase; si asiste el comodín, vale doble'],
@@ -1717,7 +1717,7 @@ function checkFra() {
   saved('fra-saved', 'Revisado a las ' + stamp() + '.', true);
 }
 
-/* ---------- Estación 2 · Las tres perillas ---------- */
+/* ---------- Estación 2 · Las tres variables ---------- */
 const BAND_NAME = { s8: 'Sub-8', s12: 'Sub-12' };
 function renderPer() {
   const st = U.perilla = U.perilla || { band: 's8', s8: {}, s12: {} };
@@ -1730,7 +1730,7 @@ function renderPer() {
     const opts = h('div', { class: 'opts', role: 'group', 'aria-label': kn.t });
     kn.o.forEach(([v, t]) => opts.append(h('button', { type: 'button', class: 'opt', 'aria-pressed': String(cfg[kn.k] === v), onclick: () => {
       cfg[kn.k] = v; st.sent = false; saveU();
-      logEv('perilla', 'ajusta', { grupo: BAND_NAME[st.band], perilla: kn.t, opción: short(t) });
+      logEv('perilla', 'ajusta', { grupo: BAND_NAME[st.band], variable: kn.t, opción: short(t) });
       renderPer();
     } }, t)));
     div.append(opts); box.append(div);
@@ -1780,7 +1780,7 @@ function drawPer(jug) {
 function checkPer() {
   const st = U.perilla || { s8: {}, s12: {} }, fb = $('#per-fb');
   const miss = ['s8', 's12'].filter(b => PERILLAS.some(kn => !st[b][kn.k]));
-  if (miss.length) { fb.className = 'fb bad'; fb.textContent = 'Te falta ajustar las tres perillas para ' + miss.map(b => BAND_NAME[b]).join(' y ') + '.'; return; }
+  if (miss.length) { fb.className = 'fb bad'; fb.textContent = 'Te falta ajustar las tres variables para ' + miss.map(b => BAND_NAME[b]).join(' y ') + '.'; return; }
   const sc = b => PERILLAS.filter(kn => st[b][kn.k] === PER_OK[b][kn.k]).length;
   const s8 = sc('s8'), s12 = sc('s12');
   const a = ['s8', 's12'].map(b => b + ':' + PERILLAS.map(kn => st[b][kn.k]).join('')).join('|');
@@ -2261,9 +2261,9 @@ function aggFranjas(S_) {
   const rp = S_.map(s => s.r.perilla).filter(r => r && num(r.ok1));
   const out = [h('div', { class: 'kpis' },
     kpi('¿De qué franja es?', rf.length ? pct(mean(rf.map(r => r.ok1)), 8) + ' %' : '—', rf.length + ' revisaron · primer intento'),
-    kpi('Perillas Sub-8', rp.length ? fmt(Math.round(mean(rp.map(r => r.s8)) * 10) / 10) + ' de 3' : '—', 'último intento'),
-    kpi('Perillas Sub-12', rp.length ? fmt(Math.round(mean(rp.map(r => r.s12)) * 10) / 10) + ' de 3' : '—', 'último intento'),
-    kpi('Perillas al primer intento', rp.length ? pct(mean(rp.map(r => r.ok1)), 6) + ' %' : '—', rp.length + ' revisaron'))];
+    kpi('Variables Sub-8', rp.length ? fmt(Math.round(mean(rp.map(r => r.s8)) * 10) / 10) + ' de 3' : '—', 'último intento'),
+    kpi('Variables Sub-12', rp.length ? fmt(Math.round(mean(rp.map(r => r.s12)) * 10) / 10) + ' de 3' : '—', 'último intento'),
+    kpi('Variables al primer intento', rp.length ? pct(mean(rp.map(r => r.ok1)), 6) + ' %' : '—', rp.length + ' revisaron'))];
   out.push(h('p', null, h('b', null, 'Tareas por franja, al primer intento')));
   out.push(itemBars(rf, FRANJAS, 'a1', it => short(it.t, 48) + ' → ' + optLabel(FRANJA_OPTS, it.a)));
   return { out, n: rf.length };
@@ -2382,7 +2382,7 @@ function descRows(r) {
   if (r.orden) rows.push(['Ordenar la sesión', 'Primer intento ' + r.orden.ok1 + ' de 8 · último ' + r.orden.ok + ' de 8 · orden de la parte principal ' + (r.orden.o ? 'bien' : 'por corregir') + ' · ' + r.orden.tries + (r.orden.tries === 1 ? ' revisión' : ' revisiones')]);
   if (r.cohe) rows.push(['Prueba de coherencia', 'Primer intento ' + r.cohe.ok1 + ' de 6 · último ' + r.cohe.ok + ' de 6' + (num(r.cohe.f) ? ' · arreglos que sirven ' + r.cohe.f + ' de 3, que no ' + r.cohe.fx : '')]);
   if (r.franja) rows.push(['¿De qué franja es?', 'Primer intento ' + r.franja.ok1 + ' de 8 · último ' + r.franja.ok + ' de 8']);
-  if (r.perilla) rows.push(['Las tres perillas', 'Primer intento ' + r.perilla.ok1 + ' de 6 · Sub-8 ' + r.perilla.s8 + ' de 3 · Sub-12 ' + r.perilla.s12 + ' de 3']);
+  if (r.perilla) rows.push(['Las tres variables', 'Primer intento ' + r.perilla.ok1 + ' de 6 · Sub-8 ' + r.perilla.s8 + ' de 3 · Sub-12 ' + r.perilla.s12 + ' de 3']);
   const b = r.bloque;
   if (b) rows.push(['Bloque de 12 minutos', optLabel(BANDAS.map(x => [x[0], x[1]]), b.b) + ': ' + b.n + ' × ' + mmss(b.r) + ' con pausas de ' + mmss(b.p) + ' = ' + mmss(b.tot) + ' · densidad ' + fmt(b.den) + ':1 (' + b.pct + ' %) · ' + (b.ok ? 'cumple' : 'no cumple') + ' · ' + b.tries + (b.tries === 1 ? ' envío' : ' envíos')]);
   if (r.sema) rows.push(['Semáforo del grupo', 'Primer intento ' + r.sema.ok1 + ' de 4 · último ' + r.sema.ok + ' de 4']);
@@ -2480,7 +2480,7 @@ function csvSummary() {
     'Predicción fila 5 min (s)', 'Fila medida (s)', '2 contra 2 medido (s)', 'Debate',
     'Ordenar 1.er intento (de 8)', 'Ordenar último (de 8)', 'Orden de la parte principal',
     'Coherencia 1.er intento (de 6)', 'Coherencia último (de 6)', 'Arreglos que sirven (de 3)', 'Arreglos que no sirven',
-    'Franjas 1.er intento (de 8)', 'Franjas último (de 8)', 'Perillas 1.er intento (de 6)', 'Perillas Sub-8 (de 3)', 'Perillas Sub-12 (de 3)',
+    'Franjas 1.er intento (de 8)', 'Franjas último (de 8)', 'Variables 1.er intento (de 6)', 'Variables Sub-8 (de 3)', 'Variables Sub-12 (de 3)',
     'Bloque', 'Bloque cumple', 'Semáforo 1.er intento (de 4)', 'Muestreo 1.er intento (de 10)', 'Cambios que sirven (de 2)', '¿Qué harías? (de 4)',
     'Taller (de 7)', 'Taller: el que más espera (s)', 'Rutina de material', 'Ticket (de 5)', 'Autoevaluación (Saber, Hacer, Ser, Convivir)', 'Va a cambiar'];
   const v = (o, k) => o && o[k] != null ? o[k] : '';
