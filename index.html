@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Licencia C Sala · Sesión 5</title>
-<meta name="description" content="Actividades interactivas de la Sesión 5 · Unidad 2 · Licencia C Sala.">
-<meta property="og:title" content="Licencia C Sala · Sesión 5">
-<meta property="og:description" content="Laboratorio del Clima y Laboratorio de Métodos: abre la actividad de cada parte de la clase.">
+<title>Licencia C Sala · Unidad 2</title>
+<meta name="description" content="Actividades interactivas de la Unidad 2 · Metodología del entrenamiento · Licencia C Sala.">
+<meta property="og:title" content="Licencia C Sala · Unidad 2">
+<meta property="og:description" content="Laboratorios de Esquemas, del Clima y de Métodos: abre la actividad de cada clase.">
 <link rel="icon" type="image/png" href="escudo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,6 +53,8 @@ main{ flex:1; padding-block:28px 40px; }
 .ico svg{ width:28px; height:28px; }
 .clima .ico{ background:var(--wine); }
 .metodos .ico{ background:var(--blue); }
+.esquemas .ico{ background:var(--gold); color:#2B1A06; }
+.medios .ico{ background:#1E7A4C; }
 .txt{ flex:1; min-width:0; }
 .time{ font-family:var(--f-display); font-size:.8rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--blue-ink); }
 .card h2{ margin-top:2px; font-family:var(--f-display); font-size:1.35rem; font-weight:700; line-height:1.2; color:var(--wine-ink); }
@@ -70,17 +72,35 @@ footer .wrap{ padding-block:16px; font-size:.85rem; color:var(--muted); }
     <div class="crest"><img src="escudo.png" alt="Escudo del Centro de Capacitación y Desarrollo de la FVF" width="171" height="200"></div>
     <div class="brand">
       <h1>Licencia C Sala</h1>
-      <p>Unidad 2 · Sesión 5 · Jueves 5 de noviembre</p>
+      <p>Unidad 2 · Metodología del entrenamiento</p>
     </div>
   </div>
 </header>
 <main class="wrap">
-  <p class="intro">Abre la actividad de la parte de la clase que estamos viendo.</p>
+  <p class="intro">Abre la actividad de la clase que estamos viendo.</p>
   <div class="cards">
+    <a class="card medios" href="medios/">
+      <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M12 5v14"/><circle cx="12" cy="12" r="3"/></svg></span>
+      <div class="txt">
+        <p class="time">Sesión 4</p>
+        <h2>Laboratorio de la Cancha</h2>
+        <p class="sub">Medios y procedimientos metodológicos</p>
+      </div>
+      <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+    </a>
+    <a class="card esquemas" href="esquemas/">
+      <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M10 2h4"/><path d="M12 2v3"/></svg></span>
+      <div class="txt">
+        <p class="time">Sesión 3</p>
+        <h2>Laboratorio de Esquemas</h2>
+        <p class="sub">Esquemas metodológicos por etapas</p>
+      </div>
+      <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+    </a>
     <a class="card clima" href="clima/">
       <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span>
       <div class="txt">
-        <p class="time">6:00 a 7:30 p. m.</p>
+        <p class="time">5 de noviembre · 6:00 p. m.</p>
         <h2>Laboratorio del Clima</h2>
         <p class="sub">Componentes psicopedagógicos</p>
       </div>
@@ -89,14 +109,14 @@ footer .wrap{ padding-block:16px; font-size:.85rem; color:var(--muted); }
     <a class="card metodos" href="metodos/">
       <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg></span>
       <div class="txt">
-        <p class="time">7:45 a 9:15 p. m.</p>
+        <p class="time">5 de noviembre · 7:45 p. m.</p>
         <h2>Laboratorio de Métodos</h2>
         <p class="sub">Métodos de entrenamiento</p>
       </div>
       <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
     </a>
   </div>
-  <p class="tip">Deja la página abierta durante la clase. Lo que escribes se guarda en tu teléfono o computadora. Solo las respuestas del Inicio del Laboratorio del Clima llegan, sin tu nombre, al tablero del instructor.</p>
+  <p class="tip">Deja la página abierta durante la clase. En los laboratorios de la Cancha y de Esquemas, lo que respondes llega con tu nombre al registro del instructor. En el del Clima, solo las respuestas del Inicio llegan, sin tu nombre. Lo demás se guarda en tu teléfono o computadora.</p>
 </main>
 <footer><div class="wrap">Centro de Capacitación y Desarrollo · Federación Venezolana de Fútbol</div></footer>
 </body>
