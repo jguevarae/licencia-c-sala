@@ -1,0 +1,67 @@
+{
+  "rules": {
+    "clima": {
+      "$sala": {
+        ".read": true,
+        ".write": true
+      }
+    },
+    "esquemas": {
+      "$sala": {
+        ".read": true,
+        "alumnos": {
+          "$id": {
+            ".write": true,
+            ".validate": "newData.child('n').isString() && newData.child('n').val().length <= 80"
+          }
+        },
+        "eventos": {
+          "$id": {
+            "$ev": {
+              ".write": "!data.exists() || data.child('c').val() === newData.child('c').val()",
+              ".validate": "newData.hasChildren(['c', 'a', 'e'])"
+            }
+          }
+        }
+      }
+    },
+    "medios": {
+      "$sala": {
+        ".read": true,
+        "alumnos": {
+          "$id": {
+            ".write": true,
+            ".validate": "newData.child('n').isString() && newData.child('n').val().length <= 80"
+          }
+        },
+        "eventos": {
+          "$id": {
+            "$ev": {
+              ".write": "!data.exists() || data.child('c').val() === newData.child('c').val()",
+              ".validate": "newData.hasChildren(['c', 'a', 'e'])"
+            }
+          }
+        }
+      }
+    },
+    "seleccion": {
+      "$sala": {
+        ".read": true,
+        "alumnos": {
+          "$id": {
+            ".write": true,
+            ".validate": "newData.child('n').isString() && newData.child('n').val().length <= 80"
+          }
+        },
+        "eventos": {
+          "$id": {
+            "$ev": {
+              ".write": "!data.exists() || data.child('c').val() === newData.child('c').val()",
+              ".validate": "newData.hasChildren(['c', 'a', 'e'])"
+            }
+          }
+        }
+      }
+    }
+  }
+}
